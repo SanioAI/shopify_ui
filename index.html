@@ -944,9 +944,9 @@
                 </p>
                 <div class="settings-group">
                     <label>Backend URL</label>
-                    <input type="url" id="backendUrl" placeholder="http://13.218.58.17" value="http://13.218.58.17">
+                    <input type="url" id="backendUrl" placeholder="https://catalog.paladio.ai" value="https://catalog.paladio.ai">
                     <p style="color: #637381; font-size: 13px; margin-top: 8px;">
-                        Production: <code>http://13.218.58.17</code> — Local: <code>http://localhost:5001</code>
+                        Production: <code>https://catalog.paladio.ai</code> — Local: <code>http://localhost:5001</code>
                     </p>
                 </div>
                 <button class="button button-secondary" style="width: auto;" onclick="saveBackendUrl()">
@@ -1320,7 +1320,7 @@
                 savedBackend = savedBackend.replace(':5000', ':5001');
                 sessionStorage.setItem('catalog_backend_url', savedBackend);
             }
-            const defaultBackend = 'http://13.218.58.17';
+            const defaultBackend = 'https://catalog.paladio.ai';
             if (savedBackend) {
                 catalogAPI.setBackendUrl(savedBackend);
                 const input = document.getElementById('backendUrl');

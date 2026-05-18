@@ -5,9 +5,9 @@
 
 const CATALOG_API = {
     // Backend proxy (api_server.py) — required for Shopify: tokens stay on the server only.
-    BACKEND_URL: null,  // e.g. 'https://your-api.example.com' - set via setBackendUrl()
+    BACKEND_URL: 'https://catalog.paladio.ai',
     // Direct catalog agent (only when same-origin or CORS allows; no Shopify Admin token in browser)
-    BASE_URL: 'http://13.218.58.17',
+    BASE_URL: 'https://catalog.paladio.ai',
     SHOPIFY_STORE: null,
 };
 
