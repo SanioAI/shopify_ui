@@ -988,14 +988,18 @@
                 
                 <div class="settings-group">
                     <label>Products per Batch</label>
-                    <select>
-                        <option value="10">10 products</option>
+                    <select id="batchSizeSelect" onchange="toggleCustomBatch(this.value)">
+                        <option value="25">25 products</option>
                         <option value="50" selected>50 products</option>
                         <option value="100">100 products</option>
+                        <option value="custom">Custom</option>
                         <option value="all">All products</option>
                     </select>
+                    <div id="customBatchInput" style="display: none; margin-top: 8px;">
+                        <input type="number" id="customBatchCount" min="1" max="10000" placeholder="Enter number of products" style="width: 100%;">
+                    </div>
                     <p style="color: #637381; font-size: 13px; margin-top: 8px;">
-                        Larger batches process faster but use more resources
+                        Choose how many products to enrich in each run
                     </p>
                 </div>
 
@@ -1014,52 +1018,9 @@
                 </div>
             </div>
 
-            <!-- API Backend (for Run Now) -->
-            <div class="settings-card">
-                <h2 style="margin: 0 0 20px 0; color: #202223;">API Backend</h2>
-                <p style="color: #637381; font-size: 14px; margin-bottom: 16px;">
-                    Flask proxy (<code>api_server.py</code>) — points to Paladio catalog at <a href="http://13.218.58.17/docs" target="_blank" rel="noopener">13.218.58.17</a> for enrichment. For local dev, run <code>python api_server.py</code> and use <code>http://localhost:5001</code>.
-                    <strong style="display: block; margin-top: 8px;">Shopify access tokens stay on this server only</strong>
-                    <span style="display: block; margin-top: 4px;">This page never asks for or stores <code>shpat_</code> tokens; configure them in the server environment.</span>
-                </p>
-                <div class="settings-group">
-                    <label>Backend URL</label>
-                    <input type="url" id="backendUrl" placeholder="https://catalog.paladio.ai" value="https://catalog.paladio.ai">
-                    <p style="color: #637381; font-size: 13px; margin-top: 8px;">
-                        Production: <code>https://catalog.paladio.ai</code> — Local: <code>http://localhost:5001</code>
-                    </p>
-                </div>
-                <button class="button button-secondary" style="width: auto;" onclick="saveBackendUrl()">
-                    Save Backend URL
-                </button>
-                <button class="button button-secondary" style="width: auto; margin-left: 8px;" onclick="testBackend()">
-                    Test Connection
-                </button>
-                <p style="margin-top: 12px;">
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input type="checkbox" id="demoMode" style="width: auto;">
-                        <span>Demo mode</span> — Use existing enriched data (no catalog API key needed)
-                    </label>
-                </p>
-                <p id="backendTestResult" style="margin-top: 8px; font-size: 13px;"></p>
-            </div>
-
-            <!-- Webhook Settings -->
-            <div class="settings-card">
-                <h2 style="margin: 0 0 20px 0; color: #202223;">Webhooks & Integration</h2>
-                
-                <div class="settings-group">
-                    <label>Webhook URL (Optional)</label>
-                    <input type="url" placeholder="https://your-domain.com/webhook" value="">
-                    <p style="color: #637381; font-size: 13px; margin-top: 8px;">
-                        Receive notifications when enrichment completes
-                    </p>
-                </div>
-
-                <button class="button button-secondary" style="width: auto;">
-                    Test Webhook
-                </button>
-            </div>
+            <!-- Hidden backend URL input (used by JS, not shown to user) -->
+            <input type="hidden" id="backendUrl" value="https://catalog.paladio.ai">
+            <p id="backendTestResult" style="display:none;"></p>
         </div>
 
         <!-- Agents Page -->
@@ -1177,6 +1138,11 @@
 
     <script>
         // Page Navigation
+        function toggleCustomBatch(value) {
+            const customInput = document.getElementById('customBatchInput');
+            if (customInput) customInput.style.display = value === 'custom' ? 'block' : 'none';
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
