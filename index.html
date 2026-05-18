@@ -519,15 +519,88 @@
 <body>
     <!-- Navigation Bar -->
     <div class="nav-bar">
-        <div class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</div>
+        <div class="nav-item active" data-page="home" onclick="showPage('home')">Home</div>
+        <div class="nav-item" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</div>
         <div class="nav-item" data-page="analytics" onclick="showPage('analytics')">Analytics</div>
         <div class="nav-item" data-page="settings" onclick="showPage('settings')">Settings</div>
         <div class="nav-item" data-page="agents" onclick="showPage('agents')">Agents</div>
         <div class="nav-item" data-page="pricing" onclick="showPage('pricing')">Pricing</div>
     </div>
     <div class="container">
+        <!-- Home / Landing Page -->
+        <div id="home" class="page active">
+            <div style="max-width: 760px; margin: 0 auto; padding: 40px 0;">
+
+                <!-- Hero -->
+                <div style="text-align: center; margin-bottom: 56px;">
+                    <div style="font-size: 48px; margin-bottom: 16px;">🧠</div>
+                    <h1 style="font-size: 32px; font-weight: 700; color: #202223; margin: 0 0 16px 0;">Your product catalog, enriched by AI</h1>
+                    <p style="font-size: 18px; color: #637381; margin: 0 0 32px 0; line-height: 1.6;">Poor product data costs you sales. Catalog Agents automatically enriches your Shopify catalog — fixing titles, attributes, taxonomy, and SEO — so every product is ready to convert.</p>
+                    <button class="button" style="font-size: 16px; padding: 14px 36px;" onclick="showPage('agents')">🔍 Get Your Free Catalog Audit</button>
+                </div>
+
+                <!-- Problem -->
+                <div style="background: #fff4f4; border-radius: 12px; padding: 32px; margin-bottom: 32px;">
+                    <h2 style="font-size: 20px; font-weight: 700; color: #202223; margin: 0 0 16px 0;">❌ The Problem</h2>
+                    <p style="color: #637381; line-height: 1.7; margin: 0 0 12px 0;">Most Shopify stores have product data that's incomplete, inconsistent, or just wrong — missing attributes, vague titles, no taxonomy, poor SEO descriptions.</p>
+                    <p style="color: #637381; line-height: 1.7; margin: 0;">This leads to lower search rankings, higher bounce rates, and lost sales — all caused by data you already own but haven't optimized.</p>
+                </div>
+
+                <!-- Solution -->
+                <div style="background: #f1f8f5; border-radius: 12px; padding: 32px; margin-bottom: 32px;">
+                    <h2 style="font-size: 20px; font-weight: 700; color: #202223; margin: 0 0 16px 0;">✅ The Solution</h2>
+                    <p style="color: #637381; line-height: 1.7; margin: 0 0 12px 0;">Catalog Agents connects directly to your Shopify store and runs AI agents that analyze every product, fill in missing data, and write it back — automatically.</p>
+                    <p style="color: #637381; line-height: 1.7; margin: 0;">No manual work. No spreadsheets. Just clean, enriched product data ready to drive more traffic and conversions.</p>
+                </div>
+
+                <!-- Features -->
+                <h2 style="font-size: 20px; font-weight: 700; color: #202223; margin: 0 0 24px 0;">⚡ What Catalog Agents does</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 48px;">
+                    <div style="background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px;">
+                        <div style="font-size: 28px; margin-bottom: 10px;">🏷️</div>
+                        <h3 style="font-size: 15px; font-weight: 600; color: #202223; margin: 0 0 8px 0;">Taxonomy &amp; Categorization</h3>
+                        <p style="font-size: 13px; color: #637381; margin: 0; line-height: 1.5;">Automatically assigns the right product categories and Google taxonomy codes for better discoverability.</p>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px;">
+                        <div style="font-size: 28px; margin-bottom: 10px;">📝</div>
+                        <h3 style="font-size: 15px; font-weight: 600; color: #202223; margin: 0 0 8px 0;">Titles &amp; Descriptions</h3>
+                        <p style="font-size: 13px; color: #637381; margin: 0; line-height: 1.5;">Rewrites product titles and descriptions to be clear, keyword-rich, and conversion-optimized.</p>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px;">
+                        <div style="font-size: 28px; margin-bottom: 10px;">🔍</div>
+                        <h3 style="font-size: 15px; font-weight: 600; color: #202223; margin: 0 0 8px 0;">SEO Optimization</h3>
+                        <p style="font-size: 13px; color: #637381; margin: 0; line-height: 1.5;">Generates meta titles, descriptions, and alt text to improve search engine rankings.</p>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px;">
+                        <div style="font-size: 28px; margin-bottom: 10px;">📋</div>
+                        <h3 style="font-size: 15px; font-weight: 600; color: #202223; margin: 0 0 8px 0;">Attributes &amp; Specs</h3>
+                        <p style="font-size: 13px; color: #637381; margin: 0; line-height: 1.5;">Fills in missing product attributes — size, material, color, dimensions — from existing data.</p>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px;">
+                        <div style="font-size: 28px; margin-bottom: 10px;">✍️</div>
+                        <h3 style="font-size: 15px; font-weight: 600; color: #202223; margin: 0 0 8px 0;">Compliance &amp; Safety</h3>
+                        <p style="font-size: 13px; color: #637381; margin: 0; line-height: 1.5;">Adds required compliance fields, tax codes, and regulatory data to keep your store audit-ready.</p>
+                    </div>
+                    <div style="background: #fff; border: 1px solid #e1e3e5; border-radius: 10px; padding: 20px;">
+                        <div style="font-size: 28px; margin-bottom: 10px;">🔄</div>
+                        <h3 style="font-size: 15px; font-weight: 600; color: #202223; margin: 0 0 8px 0;">Auto Writeback</h3>
+                        <p style="font-size: 13px; color: #637381; margin: 0; line-height: 1.5;">Pushes enriched data directly back to Shopify — no copy-pasting, no manual updates.</p>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div style="text-align: center; background: #f6f6f7; border-radius: 12px; padding: 40px;">
+                    <h2 style="font-size: 22px; font-weight: 700; color: #202223; margin: 0 0 12px 0;">Ready to see what's wrong with your catalog?</h2>
+                    <p style="color: #637381; margin: 0 0 24px 0;">Run a free audit — no credit card required. We'll show you exactly what's missing and what we can fix.</p>
+                    <button class="button" style="font-size: 15px; padding: 12px 32px; margin-right: 12px;" onclick="showPage('agents')">🔍 Free Catalog Audit</button>
+                    <button class="button button-secondary" style="font-size: 15px; padding: 12px 32px;" onclick="showPage('pricing')">View Pricing</button>
+                </div>
+
+            </div>
+        </div>
+
         <!-- Dashboard Page -->
-        <div id="dashboard" class="page active">
+        <div id="dashboard" class="page">
             <div class="header">
                 <h1>🤖 Catalog Agents Dashboard</h1>
                 <p>Quick overview of your catalog enrichment</p>
