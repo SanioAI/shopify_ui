@@ -677,7 +677,7 @@
                         <li>Taxonomy, attributes &amp; SEO data</li>
                     </ul>
                     <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openPricingCheckout(‘launch_149’)">Subscribe — $149/mo</button>
+                        <button type="button" class="button" onclick="openInlineSubscribe(‘launch_149’)">Subscribe — $149/mo</button>
                     </div>
                 </div>
                 <div class="pricing-card">
@@ -688,7 +688,7 @@
                         <li>Enrichment + compliance</li>
                     </ul>
                     <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openPricingCheckout(‘growth_299’)">Subscribe — $299/mo</button>
+                        <button type="button" class="button" onclick="openInlineSubscribe(‘growth_299’)">Subscribe — $299/mo</button>
                     </div>
                 </div>
                 <div class="pricing-card">
@@ -699,7 +699,7 @@
                         <li>Enrichment + compliance + content</li>
                     </ul>
                     <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openPricingCheckout(‘pro_799’)">Subscribe — $799/mo</button>
+                        <button type="button" class="button" onclick="openInlineSubscribe(‘pro_799’)">Subscribe — $799/mo</button>
                     </div>
                 </div>
                 <div class="pricing-card featured">
@@ -712,7 +712,7 @@
                         <li>Priority support</li>
                     </ul>
                     <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openPricingCheckout(‘advanced_1999’)">Subscribe — $1,999/mo</button>
+                        <button type="button" class="button" onclick="openInlineSubscribe(‘advanced_1999’)">Subscribe — $1,999/mo</button>
                     </div>
                 </div>
                 <div class="pricing-card">
@@ -724,40 +724,38 @@
                         <li>Custom integrations</li>
                     </ul>
                     <div class="pricing-cta">
-                        <button type="button" class="button button-secondary" onclick="openPricingContact(‘enterprise’)">Contact sales</button>
+                        <button type="button" class="button button-secondary" onclick="openInlineSubscribe(‘enterprise’)">Contact sales</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inline subscription form — shown when any Subscribe button is clicked -->
+            <div id="inlineSubscribeForm" style="display: none; margin-top: 24px; background: #fff; border: 1px solid #e1e3e5; border-radius: 8px; padding: 32px;">
+                <h2 style="font-size: 18px; font-weight: 700; color: #202223; margin: 0 0 4px 0;">Request access</h2>
+                <p id="inlinePlanLabel" style="font-size: 14px; color: #008060; font-weight: 600; margin: 0 0 16px 0;"></p>
+                <p style="font-size: 14px; color: #637381; margin: 0 0 20px 0;">No payment collected here. We’ll review your request and follow up within 1 business day.</p>
+                <div id="inlineFormContent">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 600; color: #202223; margin-bottom: 6px;">Full name</label>
+                            <input type="text" id="inlineName" placeholder="Jane Merchant" style="width: 100%; padding: 8px 12px; border: 1px solid #c9cccf; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 13px; font-weight: 600; color: #202223; margin-bottom: 6px;">Email</label>
+                            <input type="email" id="inlineEmail" placeholder="you@store.com" style="width: 100%; padding: 8px 12px; border: 1px solid #c9cccf; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <button class="button" style="padding: 10px 24px;" onclick="submitInlineSubscribe()">Submit request</button>
+                        <button class="button button-secondary" style="padding: 10px 24px;" onclick="document.getElementById(‘inlineSubscribeForm’).style.display=’none’">Cancel</button>
                     </div>
                 </div>
             </div>
 
             <div class="settings-card" style="margin-top: 8px;">
                 <p style="color: #637381; font-size: 14px; margin: 0;">
-                    Need a custom bundle? <a href="#" onclick="openPricingContact(‘enterprise’); return false;">Contact sales</a> — we’ll tailor a plan to your needs.
+                    Need a custom bundle? <a href="#" onclick="openInlineSubscribe(‘enterprise’); return false;">Contact sales</a> — we’ll tailor a plan to your needs.
                 </p>
-                <p style="color: #637381; font-size: 12px; margin: 12px 0 0 0;">
-                    Subscribe sends a request for approval (no payment on this page). Payment and formal contract can follow after we confirm your plan.
-                </p>
-            </div>
-        </div>
-
-        <!-- Subscription / contact form modal (approval request — no payment gateway) -->
-        <div id="subscribeModalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="subscribeModalTitle">
-            <div class="modal-dialog">
-                <button type="button" class="modal-close" onclick="closeSubscribeModal()" aria-label="Close">&times;</button>
-                <h2 id="subscribeModalTitle">Subscription request</h2>
-                <p class="modal-lead">Tell us who you are. We’ll review your plan and follow up with approval and next steps (including contract where applicable). No payment is collected here.</p>
-                <div id="subscribePlanPill" class="modal-plan-pill"></div>
-                <form id="subscribeForm" class="modal-form" onsubmit="submitSubscribeForm(event)">
-                    <input type="hidden" id="subscribePlanKey" name="plan_key" value="">
-                    <label for="subscribeName">Full name</label>
-                    <input type="text" id="subscribeName" name="name" required autocomplete="name" placeholder="Jane Merchant">
-                    <label for="subscribeEmail">Email</label>
-                    <input type="email" id="subscribeEmail" name="email" required autocomplete="email" placeholder="you@store.com">
-                    <div class="checkbox-row">
-                        <input type="checkbox" id="subscribeAgree" name="agree_terms" required>
-                        <label for="subscribeAgree" style="font-weight: 400; margin: 0;">I have read and agree to proceed under the applicable subscription terms and contract process for approval. I understand payment and final agreement will be handled in a separate step after approval.</label>
-                    </div>
-                    <button type="submit" class="button">Submit for approval</button>
-                </form>
             </div>
         </div>
 
@@ -1253,6 +1251,29 @@
 
         function pricingStartFree() {
             showPage('settings');
+        }
+
+        function openInlineSubscribe(planKey) {
+            const label = PRICING_LABELS[planKey] || planKey;
+            const form = document.getElementById('inlineSubscribeForm');
+            const planLabel = document.getElementById('inlinePlanLabel');
+            const content = document.getElementById('inlineFormContent');
+            if (!form) return;
+            document.getElementById('inlineName') && (document.getElementById('inlineName').value = '');
+            document.getElementById('inlineEmail') && (document.getElementById('inlineEmail').value = '');
+            if (planLabel) planLabel.textContent = 'Selected plan: ' + label;
+            form._planKey = planKey;
+            if (content) content.style.display = 'block';
+            form.style.display = 'block';
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function submitInlineSubscribe() {
+            const name = (document.getElementById('inlineName').value || '').trim();
+            const email = (document.getElementById('inlineEmail').value || '').trim();
+            if (!name || !email) { alert('Please enter your name and email.'); return; }
+            const content = document.getElementById('inlineFormContent');
+            if (content) content.innerHTML = '<div style="text-align:center;padding:24px 0;"><div style="font-size:36px;margin-bottom:12px;">&#10003;</div><p style="font-weight:600;color:#202223;margin:0 0 8px;">Thanks, ' + name + '!</p><p style="color:#637381;font-size:14px;margin:0 0 16px;">We\'ll reach out to <strong>' + email + '</strong> within 1 business day.</p><p style="color:#8c9196;font-size:13px;">Questions? <a href="mailto:shopify@paladio.ai" style="color:#008060;">shopify@paladio.ai</a></p></div>';
         }
 
         // Settings - Run Mode Selection
