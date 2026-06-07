@@ -1226,23 +1226,22 @@
                 alert('Please confirm you agree to the terms and contract process.');
                 return;
             }
-            const body =
-                'Subscription approval request\r\n' +
-                '---\r\n' +
-                'Plan: ' + planLabel + '\r\n' +
-                'Name: ' + name + '\r\n' +
-                'Email: ' + email + '\r\n' +
-                '\r\n' +
-                'Agreement: I agree to proceed under the subscription terms and contract process for approval. Payment will follow a separate step after approval.\r\n';
-            const subject = 'Subscription approval request — ' + planLabel;
-            const mailtoUrl = 'mailto:' + SUBSCRIBE_MAIL +
-                '?subject=' + encodeURIComponent(subject) +
-                '&body=' + encodeURIComponent(body);
-            window.location.href = mailtoUrl;
-            closeSubscribeModal();
-            setTimeout(function () {
-                alert('Your email app should open with the request pre-filled. If nothing opens, email ' + SUBSCRIBE_MAIL + ' with the same details.');
-            }, 300);
+
+            // Replace form with confirmation message
+            const form = document.getElementById('subscribeForm');
+            const pill = document.getElementById('subscribePlanPill');
+            const title = document.getElementById('subscribeModalTitle');
+            title.textContent = 'Request received';
+            if (pill) pill.textContent = '';
+            form.innerHTML = `
+                <div style="text-align: center; padding: 16px 0;">
+                    <div style="font-size: 40px; margin-bottom: 16px;">✓</div>
+                    <p style="font-size: 15px; color: #202223; font-weight: 600; margin: 0 0 8px 0;">Thanks, ${name}!</p>
+                    <p style="font-size: 14px; color: #637381; margin: 0 0 16px 0;">We've received your request for the <strong>${planLabel}</strong> plan. Our team will reach out to <strong>${email}</strong> within 1 business day to confirm your plan and next steps.</p>
+                    <p style="font-size: 13px; color: #8c9196; margin: 0 0 24px 0;">Questions? Email us at <a href="mailto:shopify@paladio.ai" style="color: #008060;">shopify@paladio.ai</a></p>
+                    <button type="button" class="button" onclick="closeSubscribeModal()">Done</button>
+                </div>
+            `;
         }
 
         document.getElementById('subscribeModalOverlay').addEventListener('click', function (ev) {
