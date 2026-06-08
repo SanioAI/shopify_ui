@@ -123,6 +123,16 @@ class CatalogAgentAPI {
             });
             const data = await resp.json();
             if (!resp.ok) {
+                if (data.reconnect && data.install_url) {
+                    const installUrl = `https://catalog.paladio.ai${data.install_url}`;
+                    onProgress({
+                        step: 'error',
+                        message: data.error,
+                        reconnect: true,
+                        install_url: installUrl,
+                    });
+                    throw new Error(data.error);
+                }
                 const msg = data.error || `Backend error: ${resp.status}`;
                 const detail = data.detail ? ` (${data.detail})` : '';
                 throw new Error(msg + detail);

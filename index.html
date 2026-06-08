@@ -1534,6 +1534,13 @@
             if (progress.step === 'error') {
                 if (bar) bar.style.background = '#d82c0d';
                 if (status) { status.textContent = progress.message; status.style.color = '#d82c0d'; }
+                if (progress.reconnect && progress.install_url && log) {
+                    const btn = document.createElement('a');
+                    btn.href = progress.install_url;
+                    btn.textContent = 'Reconnect to Shopify';
+                    btn.style.cssText = 'display:inline-block;margin-top:8px;padding:8px 16px;background:#008060;color:white;border-radius:6px;text-decoration:none;font-weight:600;font-size:13px;';
+                    log.appendChild(btn);
+                }
             } else if (progress.step === 'complete') {
                 // Mark writeback active briefly before done
                 stepOrder.forEach((s, i) => {
