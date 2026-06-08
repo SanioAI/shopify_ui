@@ -1183,11 +1183,11 @@
         }
 
         const PRICING_LABELS = {
-            enrichment_100: 'Enrichment only — $100/mo (up to 5,000 SKUs)',
-            compliance_150: 'Enrichment + Compliance — $150/mo',
-            content_150: 'Enrichment + Content — $150/mo',
-            all_three_200: 'All three — $200/mo',
-            enterprise: 'Enterprise / custom SKUs'
+            launch_149: 'Launch — $149/mo',
+            growth_299: 'Growth — $299/mo',
+            pro_799: 'Pro — $799/mo',
+            advanced_1999: 'Advanced — $1,999/mo',
+            enterprise: 'Enterprise / custom pricing'
         };
 
         const SUBSCRIBE_MAIL = 'support@catalogagents.com';
@@ -1242,11 +1242,14 @@
             `;
         }
 
-        document.getElementById('subscribeModalOverlay').addEventListener('click', function (ev) {
-            if (ev.target === this) closeSubscribeModal();
-        });
+        const _modalOverlay = document.getElementById('subscribeModalOverlay');
+        if (_modalOverlay) {
+            _modalOverlay.addEventListener('click', function (ev) {
+                if (ev.target === this) closeSubscribeModal();
+            });
+        }
         document.addEventListener('keydown', function (ev) {
-            if (ev.key === 'Escape') closeSubscribeModal();
+            if (ev.key === 'Escape' && document.getElementById('subscribeModalOverlay')) closeSubscribeModal();
         });
 
         function pricingStartFree() {
