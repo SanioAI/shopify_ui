@@ -656,7 +656,7 @@
                         <div style="font-size:28px;font-weight:800;color:#008060;margin-bottom:8px;">$0 <span style="font-size:15px;font-weight:400;color:#637381;">/ month</span></div>
                         <div style="font-size:14px;color:#637381;">Up to 25 SKUs &mdash; try enrichment on a small set</div>
                     </div>
-                    <button type="button" onclick="showPage(‘settings’)" style="padding:10px 24px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;">Get started free</button>
+                    <button type="button" onclick="pricingStartFree()" style="padding:10px 24px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;">Get started free</button>
                 </div>
 
                 <!-- Paid plans -->
@@ -707,13 +707,18 @@
                 </div>
 
                 <!-- Enterprise -->
-                <div style="background:#fff;border:1px solid #e1e3e5;border-radius:10px;padding:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                <div style="background:linear-gradient(135deg,#f6f6f7 0%,#e8f5f0 100%);border:1px solid #b5e0d4;border-radius:10px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
                     <div>
-                        <div style="font-size:18px;font-weight:700;color:#202223;margin-bottom:4px;">Enterprise</div>
-                        <div style="font-size:28px;font-weight:800;color:#008060;margin-bottom:8px;">Custom</div>
-                        <div style="font-size:14px;color:#637381;">Custom SKU limits &middot; Dedicated support &middot; Custom integrations</div>
+                        <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:#008060;text-transform:uppercase;margin-bottom:8px;">Enterprise</div>
+                        <div style="font-size:26px;font-weight:800;color:#202223;margin-bottom:10px;">Custom pricing</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                            <span style="background:#fff;border:1px solid #c9cccf;border-radius:20px;padding:4px 12px;font-size:13px;color:#202223;">Unlimited SKUs</span>
+                            <span style="background:#fff;border:1px solid #c9cccf;border-radius:20px;padding:4px 12px;font-size:13px;color:#202223;">Dedicated support</span>
+                            <span style="background:#fff;border:1px solid #c9cccf;border-radius:20px;padding:4px 12px;font-size:13px;color:#202223;">Custom integrations</span>
+                            <span style="background:#fff;border:1px solid #c9cccf;border-radius:20px;padding:4px 12px;font-size:13px;color:#202223;">SLA guarantee</span>
+                        </div>
                     </div>
-                    <button type="button" onclick="openSubscribeModal(‘enterprise’,’Enterprise / custom pricing’)" style="padding:10px 24px;background:#fff;color:#008060;border:2px solid #008060;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;">Contact sales</button>
+                    <button type="button" onclick="openSubscribeModal(‘enterprise’,’Enterprise’)" style="padding:12px 28px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;">Contact sales</button>
                 </div>
 
             </div>
@@ -1142,101 +1147,25 @@
             if (navItem) navItem.classList.add('active');
         }
 
-        const PRICING_LABELS = {
-            launch_149: 'Launch — $149/mo',
-            growth_299: 'Growth — $299/mo',
-            pro_799: 'Pro — $799/mo',
-            advanced_1999: 'Advanced — $1,999/mo',
-            enterprise: 'Enterprise / custom pricing'
-        };
-
-        const SUBSCRIBE_MAIL = 'support@catalogagents.com';
-
-        function openPricingCheckout(planKey) {
-            openSubscribeModal(planKey);
-        }
-
-        function openPricingContact(kind) {
-            openSubscribeModal(kind);
-        }
-
-        function openSubscribeModal(planKey) {
-            const label = PRICING_LABELS[planKey] || planKey;
-            document.getElementById('subscribeForm').reset();
-            document.getElementById('subscribePlanKey').value = planKey;
-            document.getElementById('subscribePlanPill').textContent = 'Selected plan: ' + label;
-            document.getElementById('subscribeModalOverlay').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeSubscribeModal() {
-            document.getElementById('subscribeModalOverlay').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function submitSubscribeForm(e) {
-            e.preventDefault();
-            const planKey = document.getElementById('subscribePlanKey').value;
-            const planLabel = PRICING_LABELS[planKey] || planKey;
-            const name = document.getElementById('subscribeName').value.trim();
-            const email = document.getElementById('subscribeEmail').value.trim();
-            if (!document.getElementById('subscribeAgree').checked) {
-                alert('Please confirm you agree to the terms and contract process.');
-                return;
-            }
-
-            // Replace form with confirmation message
-            const form = document.getElementById('subscribeForm');
-            const pill = document.getElementById('subscribePlanPill');
-            const title = document.getElementById('subscribeModalTitle');
-            title.textContent = 'Request received';
-            if (pill) pill.textContent = '';
-            form.innerHTML = `
-                <div style="text-align: center; padding: 16px 0;">
-                    <div style="font-size: 40px; margin-bottom: 16px;">✓</div>
-                    <p style="font-size: 15px; color: #202223; font-weight: 600; margin: 0 0 8px 0;">Thanks, ${name}!</p>
-                    <p style="font-size: 14px; color: #637381; margin: 0 0 16px 0;">We've received your request for the <strong>${planLabel}</strong> plan. Our team will reach out to <strong>${email}</strong> within 1 business day to confirm your plan and next steps.</p>
-                    <p style="font-size: 13px; color: #8c9196; margin: 0 0 24px 0;">Questions? Email us at <a href="mailto:shopify@paladio.ai" style="color: #008060;">shopify@paladio.ai</a></p>
-                    <button type="button" class="button" onclick="closeSubscribeModal()">Done</button>
-                </div>
-            `;
-        }
-
-        const _modalOverlay = document.getElementById('subscribeModalOverlay');
-        if (_modalOverlay) {
-            _modalOverlay.addEventListener('click', function (ev) {
-                if (ev.target === this) closeSubscribeModal();
-            });
-        }
-        document.addEventListener('keydown', function (ev) {
-            if (ev.key === 'Escape' && document.getElementById('subscribeModalOverlay')) closeSubscribeModal();
-        });
-
         function pricingStartFree() {
             showPage('settings');
-        }
-
-        function openInlineSubscribe(planKey) {
-            const label = PRICING_LABELS[planKey] || planKey;
-            const form = document.getElementById('inlineSubscribeForm');
-            const planLabel = document.getElementById('inlinePlanLabel');
-            const content = document.getElementById('inlineFormContent');
-            if (!form) return;
-            document.getElementById('inlineName') && (document.getElementById('inlineName').value = '');
-            document.getElementById('inlineEmail') && (document.getElementById('inlineEmail').value = '');
-            if (planLabel) planLabel.textContent = 'Selected plan: ' + label;
-            form._planKey = planKey;
-            if (content) content.style.display = 'block';
-            form.style.display = 'block';
-            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(function() {
+                var btn = document.querySelector('#settings button[onclick*="runEnrichment"]');
+                if (btn) {
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    btn.style.outline = '3px solid #008060';
+                    btn.style.outlineOffset = '3px';
+                    setTimeout(function() { btn.style.outline = ''; btn.style.outlineOffset = ''; }, 2000);
+                }
+            }, 150);
         }
 
         function submitInlineSubscribe() {
-            const name = (document.getElementById('inlineName').value || '').trim();
-            const email = (document.getElementById('inlineEmail').value || '').trim();
+            const name = (document.getElementById('inlineName') ? document.getElementById('inlineName').value : '').trim();
+            const email = (document.getElementById('inlineEmail') ? document.getElementById('inlineEmail').value : '').trim();
             if (!name || !email) { alert('Please enter your name and email.'); return; }
             const content = document.getElementById('inlineFormContent');
-            if (content) content.innerHTML = '<div style="text-align:center;padding:24px 0;"><div style="font-size:36px;margin-bottom:12px;">&#10003;</div><p style="font-weight:600;color:#202223;margin:0 0 8px;">Thanks, ' + name + '!</p><p style="color:#637381;font-size:14px;margin:0 0 16px;">We\'ll reach out to <strong>' + email + '</strong> within 1 business day.</p><p style="color:#8c9196;font-size:13px;">Questions? <a href="mailto:shopify@paladio.ai" style="color:#008060;">shopify@paladio.ai</a></p></div>';
+            if (content) content.innerHTML = '<div style="text-align:center;padding:24px 0;"><div style="font-size:36px;margin-bottom:12px;">&#10003;</div><p style="font-weight:600;color:#202223;margin:0 0 8px;">Thanks, ' + name + '!</p><p style="color:#637381;font-size:14px;margin:0 0 16px;">We will reach out to you shortly.</p></div>';
         }
 
         // Settings - Run Mode Selection
@@ -1544,9 +1473,8 @@
 <div id="subscribeModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
     <div style="background:#fff;border-radius:12px;padding:32px;max-width:480px;width:90%;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.2);">
         <button onclick="closeSubscribeModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#637381;">✕</button>
-        <h2 style="font-size:20px;font-weight:700;color:#202223;margin:0 0 4px 0;">Request access</h2>
-        <p id="subscribeModalPlan" style="font-size:14px;color:#008060;font-weight:600;margin:0 0 8px 0;"></p>
-        <p style="font-size:14px;color:#637381;margin:0 0 20px 0;">No payment collected here. We'll follow up within 1 business day.</p>
+        <h2 style="font-size:20px;font-weight:700;color:#202223;margin:0 0 4px 0;">Get in touch</h2>
+        <p id="subscribeModalPlan" style="font-size:14px;color:#008060;font-weight:600;margin:0 0 16px 0;"></p>
         <div id="subscribeModalBody">
             <div style="margin-bottom:14px;">
                 <label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Full name</label>
@@ -1566,45 +1494,39 @@
 
 <script>
 function openSubscribeModal(planKey, planLabel) {
-    const modal = document.getElementById('subscribeModal');
-    document.getElementById('subscribeModalPlan').textContent = 'Selected plan: ' + planLabel;
-    document.getElementById('smName').value = '';
-    document.getElementById('smEmail').value = '';
-    document.getElementById('subscribeModalBody').innerHTML = `
-        <div style="margin-bottom:14px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Full name</label>
-            <input type="text" id="smName" placeholder="Jane Merchant" style="width:100%;padding:9px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">
-        </div>
-        <div style="margin-bottom:20px;">
-            <label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Work email</label>
-            <input type="email" id="smEmail" placeholder="you@store.com" style="width:100%;padding:9px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">
-        </div>
-        <div style="display:flex;gap:12px;">
-            <button class="button" style="padding:10px 24px;" onclick="submitSubscribeModal()">Submit request</button>
-            <button class="button button-secondary" style="padding:10px 24px;" onclick="closeSubscribeModal()">Cancel</button>
-        </div>`;
+    var modal = document.getElementById('subscribeModal');
+    document.getElementById('subscribeModalPlan').textContent = planLabel;
     modal._planLabel = planLabel;
+    document.getElementById('subscribeModalBody').innerHTML =
+        '<div style="margin-bottom:16px;">' +
+            '<label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Full name</label>' +
+            '<input type="text" id="smName" placeholder="Jane Smith" style="width:100%;padding:10px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">' +
+        '</div>' +
+        '<div style="margin-bottom:24px;">' +
+            '<label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Work email</label>' +
+            '<input type="email" id="smEmail" placeholder="you@store.com" style="width:100%;padding:10px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">' +
+        '</div>' +
+        '<div style="display:flex;gap:10px;">' +
+            '<button onclick="submitSubscribeModal()" style="flex:1;padding:11px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;">Send request</button>' +
+            '<button onclick="closeSubscribeModal()" style="padding:11px 20px;background:#fff;color:#202223;border:1px solid #c9cccf;border-radius:6px;font-size:14px;cursor:pointer;">Cancel</button>' +
+        '</div>';
     modal.style.display = 'flex';
-}
-function openInlineSubscribe(planKey) {
-    const labels = { launch_149:'Launch — $149/mo', growth_299:'Growth — $299/mo', pro_799:'Pro — $799/mo', advanced_1999:'Advanced — $1,999/mo', enterprise:'Enterprise / custom pricing' };
-    openSubscribeModal(planKey, labels[planKey] || planKey);
+    setTimeout(function(){ var n = document.getElementById('smName'); if(n) n.focus(); }, 50);
 }
 function closeSubscribeModal() {
     document.getElementById('subscribeModal').style.display = 'none';
 }
 function submitSubscribeModal() {
-    const name = (document.getElementById('smName').value || '').trim();
-    const email = (document.getElementById('smEmail').value || '').trim();
+    var name = (document.getElementById('smName').value || '').trim();
+    var email = (document.getElementById('smEmail').value || '').trim();
     if (!name || !email) { alert('Please enter your name and email.'); return; }
-    const modal = document.getElementById('subscribeModal');
+    var modal = document.getElementById('subscribeModal');
     document.getElementById('subscribeModalBody').innerHTML =
-        '<div style="text-align:center;padding:16px 0;">' +
-        '<div style="font-size:40px;margin-bottom:12px;">✓</div>' +
-        '<p style="font-weight:600;color:#202223;margin:0 0 8px;">Thanks, ' + name + '!</p>' +
-        '<p style="color:#637381;font-size:14px;margin:0 0 16px;">We\'ll reach out to <strong>' + email + '</strong> within 1 business day about the <strong>' + (modal._planLabel||'') + '</strong> plan.</p>' +
-        '<p style="color:#8c9196;font-size:13px;margin:0 0 20px;">Questions? <a href="mailto:shopify@paladio.ai" style="color:#008060;">shopify@paladio.ai</a></p>' +
-        '<button class="button" onclick="closeSubscribeModal()">Done</button>' +
+        '<div style="text-align:center;padding:20px 0 8px;">' +
+        '<div style="font-size:44px;margin-bottom:14px;">✓</div>' +
+        '<p style="font-size:16px;font-weight:700;color:#202223;margin:0 0 10px;">Thanks, ' + name + '!</p>' +
+        '<p style="font-size:14px;color:#637381;margin:0 0 24px;line-height:1.6;">We will reach out to you shortly at<br><strong>' + email + '</strong>.</p>' +
+        '<button onclick="closeSubscribeModal()" style="padding:10px 28px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;">Done</button>' +
         '</div>';
 }
 document.getElementById('subscribeModal').addEventListener('click', function(e) {
