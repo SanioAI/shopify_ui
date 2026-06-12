@@ -642,120 +642,80 @@
 
         <!-- Pricing Page -->
         <div id="pricing" class="page">
-            <div class="header">
-                <h1>💳 Pricing</h1>
-                <p>Simple plans by catalog size and which agents you need</p>
-            </div>
+            <div class="container" style="max-width:960px;padding:24px 20px;">
 
-            <p class="pricing-intro">
-                Start free and scale as your catalog grows. All plans include AI-powered catalog enrichment.
-            </p>
+                <div style="margin-bottom:24px;">
+                    <h1 style="font-size:24px;font-weight:700;color:#202223;margin:0 0 6px;">Pricing</h1>
+                    <p style="color:#637381;font-size:15px;margin:0;">Start free. Scale as your catalog grows. All plans include AI-powered enrichment.</p>
+                </div>
 
-            <div class="pricing-section-title">Free tier</div>
-            <div class="pricing-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 420px;">
-                <div class="pricing-card">
-                    <span class="pricing-badge">Get started</span>
-                    <h3>Free</h3>
-                    <div class="price">$0 <small>/ month</small></div>
-                    <ul>
-                        <li>Up to <strong>25 SKUs</strong></li>
-                        <li>Try catalog enrichment on a small set</li>
-                    </ul>
-                    <div class="pricing-cta">
-                        <button type="button" class="button" onclick="pricingStartFree()">Get started free</button>
+                <!-- Free -->
+                <div style="background:#fff;border:1px solid #e1e3e5;border-radius:10px;padding:24px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                    <div>
+                        <div style="font-size:18px;font-weight:700;color:#202223;margin-bottom:4px;">Free</div>
+                        <div style="font-size:28px;font-weight:800;color:#008060;margin-bottom:8px;">$0 <span style="font-size:15px;font-weight:400;color:#637381;">/ month</span></div>
+                        <div style="font-size:14px;color:#637381;">Up to 25 SKUs &mdash; try enrichment on a small set</div>
                     </div>
+                    <button type="button" onclick="showPage(‘settings’)" style="padding:10px 24px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;">Get started free</button>
                 </div>
-            </div>
 
-            <div class="pricing-section-title">Paid plans</div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Launch</h3>
-                    <div class="price">$149 <small>/ month</small></div>
-                    <ul>
-                        <li>Core catalog enrichment</li>
-                        <li>Taxonomy, attributes &amp; SEO data</li>
-                    </ul>
-                    <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openInlineSubscribe(‘launch_149’)">Subscribe — $149/mo</button>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <h3>Growth</h3>
-                    <div class="price">$299 <small>/ month</small></div>
-                    <ul>
-                        <li>Everything in Launch</li>
-                        <li>Enrichment + compliance</li>
-                    </ul>
-                    <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openInlineSubscribe(‘growth_299’)">Subscribe — $299/mo</button>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <h3>Pro</h3>
-                    <div class="price">$799 <small>/ month</small></div>
-                    <ul>
-                        <li>Everything in Growth</li>
-                        <li>Enrichment + compliance + content</li>
-                    </ul>
-                    <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openInlineSubscribe(‘pro_799’)">Subscribe — $799/mo</button>
-                    </div>
-                </div>
-                <div class="pricing-card featured">
-                    <span class="pricing-badge">Best value</span>
-                    <h3>Advanced</h3>
-                    <div class="price">$1,999 <small>/ month</small></div>
-                    <ul>
-                        <li>Everything in Pro</li>
-                        <li>Full catalog AI stack</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <div class="pricing-cta">
-                        <button type="button" class="button" onclick="openInlineSubscribe(‘advanced_1999’)">Subscribe — $1,999/mo</button>
-                    </div>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">Custom</div>
-                    <ul>
-                        <li>Custom SKU limits</li>
-                        <li>Dedicated support</li>
-                        <li>Custom integrations</li>
-                    </ul>
-                    <div class="pricing-cta">
-                        <button type="button" class="button button-secondary" onclick="openInlineSubscribe(‘enterprise’)">Contact sales</button>
-                    </div>
-                </div>
-            </div>
+                <!-- Paid plans -->
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:16px;">
 
-            <!-- Inline subscription form — shown when any Subscribe button is clicked -->
-            <div id="inlineSubscribeForm" style="display: none; margin-top: 24px; background: #fff; border: 1px solid #e1e3e5; border-radius: 8px; padding: 32px;">
-                <h2 style="font-size: 18px; font-weight: 700; color: #202223; margin: 0 0 4px 0;">Request access</h2>
-                <p id="inlinePlanLabel" style="font-size: 14px; color: #008060; font-weight: 600; margin: 0 0 16px 0;"></p>
-                <p style="font-size: 14px; color: #637381; margin: 0 0 20px 0;">No payment collected here. We’ll review your request and follow up within 1 business day.</p>
-                <div id="inlineFormContent">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
-                        <div>
-                            <label style="display: block; font-size: 13px; font-weight: 600; color: #202223; margin-bottom: 6px;">Full name</label>
-                            <input type="text" id="inlineName" placeholder="Jane Merchant" style="width: 100%; padding: 8px 12px; border: 1px solid #c9cccf; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-                        </div>
-                        <div>
-                            <label style="display: block; font-size: 13px; font-weight: 600; color: #202223; margin-bottom: 6px;">Email</label>
-                            <input type="email" id="inlineEmail" placeholder="you@store.com" style="width: 100%; padding: 8px 12px; border: 1px solid #c9cccf; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-                        </div>
+                    <div style="background:#fff;border:1px solid #e1e3e5;border-radius:10px;padding:24px;display:flex;flex-direction:column;">
+                        <div style="font-size:17px;font-weight:700;color:#202223;margin-bottom:6px;">Launch</div>
+                        <div style="font-size:26px;font-weight:800;color:#202223;margin-bottom:12px;">$149 <span style="font-size:13px;font-weight:400;color:#637381;">/ mo</span></div>
+                        <ul style="color:#637381;font-size:13px;margin:0 0 20px;padding-left:18px;flex:1;">
+                            <li>Core catalog enrichment</li>
+                            <li>Taxonomy, attributes &amp; SEO data</li>
+                        </ul>
+                        <button type="button" onclick="openSubscribeModal(‘launch_149’,’Launch — $149/mo’)" style="width:100%;padding:9px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Subscribe — $149/mo</button>
                     </div>
-                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                        <button class="button" style="padding: 10px 24px;" onclick="submitInlineSubscribe()">Submit request</button>
-                        <button class="button button-secondary" style="padding: 10px 24px;" onclick="document.getElementById(‘inlineSubscribeForm’).style.display=’none’">Cancel</button>
-                    </div>
-                </div>
-            </div>
 
-            <div class="settings-card" style="margin-top: 8px;">
-                <p style="color: #637381; font-size: 14px; margin: 0;">
-                    Need a custom bundle? <a href="#" onclick="openInlineSubscribe(‘enterprise’); return false;">Contact sales</a> — we’ll tailor a plan to your needs.
-                </p>
+                    <div style="background:#fff;border:1px solid #e1e3e5;border-radius:10px;padding:24px;display:flex;flex-direction:column;">
+                        <div style="font-size:17px;font-weight:700;color:#202223;margin-bottom:6px;">Growth</div>
+                        <div style="font-size:26px;font-weight:800;color:#202223;margin-bottom:12px;">$299 <span style="font-size:13px;font-weight:400;color:#637381;">/ mo</span></div>
+                        <ul style="color:#637381;font-size:13px;margin:0 0 20px;padding-left:18px;flex:1;">
+                            <li>Everything in Launch</li>
+                            <li>Enrichment + compliance</li>
+                        </ul>
+                        <button type="button" onclick="openSubscribeModal(‘growth_299’,’Growth — $299/mo’)" style="width:100%;padding:9px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Subscribe — $299/mo</button>
+                    </div>
+
+                    <div style="background:#fff;border:1px solid #e1e3e5;border-radius:10px;padding:24px;display:flex;flex-direction:column;">
+                        <div style="font-size:17px;font-weight:700;color:#202223;margin-bottom:6px;">Pro</div>
+                        <div style="font-size:26px;font-weight:800;color:#202223;margin-bottom:12px;">$799 <span style="font-size:13px;font-weight:400;color:#637381;">/ mo</span></div>
+                        <ul style="color:#637381;font-size:13px;margin:0 0 20px;padding-left:18px;flex:1;">
+                            <li>Everything in Growth</li>
+                            <li>Enrichment + compliance + content</li>
+                        </ul>
+                        <button type="button" onclick="openSubscribeModal(‘pro_799’,’Pro — $799/mo’)" style="width:100%;padding:9px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Subscribe — $799/mo</button>
+                    </div>
+
+                    <div style="background:#fff;border:2px solid #008060;border-radius:10px;padding:24px;display:flex;flex-direction:column;position:relative;">
+                        <span style="position:absolute;top:-1px;left:16px;background:#008060;color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:0 0 6px 6px;">BEST VALUE</span>
+                        <div style="font-size:17px;font-weight:700;color:#202223;margin-bottom:6px;margin-top:8px;">Advanced</div>
+                        <div style="font-size:26px;font-weight:800;color:#202223;margin-bottom:12px;">$1,999 <span style="font-size:13px;font-weight:400;color:#637381;">/ mo</span></div>
+                        <ul style="color:#637381;font-size:13px;margin:0 0 20px;padding-left:18px;flex:1;">
+                            <li>Everything in Pro</li>
+                            <li>Full catalog AI stack</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <button type="button" onclick="openSubscribeModal(‘advanced_1999’,’Advanced — $1,999/mo’)" style="width:100%;padding:9px;background:#008060;color:#fff;border:none;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;">Subscribe — $1,999/mo</button>
+                    </div>
+
+                </div>
+
+                <!-- Enterprise -->
+                <div style="background:#fff;border:1px solid #e1e3e5;border-radius:10px;padding:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
+                    <div>
+                        <div style="font-size:18px;font-weight:700;color:#202223;margin-bottom:4px;">Enterprise</div>
+                        <div style="font-size:28px;font-weight:800;color:#008060;margin-bottom:8px;">Custom</div>
+                        <div style="font-size:14px;color:#637381;">Custom SKU limits &middot; Dedicated support &middot; Custom integrations</div>
+                    </div>
+                    <button type="button" onclick="openSubscribeModal(‘enterprise’,’Enterprise / custom pricing’)" style="padding:10px 24px;background:#fff;color:#008060;border:2px solid #008060;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;">Contact sales</button>
+                </div>
+
             </div>
         </div>
 
@@ -1605,22 +1565,30 @@
 </div>
 
 <script>
-function openInlineSubscribe(planKey) {
-    const labels = {
-        launch_149: 'Launch — $149/mo',
-        growth_299: 'Growth — $299/mo',
-        pro_799: 'Pro — $799/mo',
-        advanced_1999: 'Advanced — $1,999/mo',
-        enterprise: 'Enterprise / custom pricing'
-    };
+function openSubscribeModal(planKey, planLabel) {
     const modal = document.getElementById('subscribeModal');
-    document.getElementById('subscribeModalPlan').textContent = 'Selected plan: ' + (labels[planKey] || planKey);
+    document.getElementById('subscribeModalPlan').textContent = 'Selected plan: ' + planLabel;
     document.getElementById('smName').value = '';
     document.getElementById('smEmail').value = '';
-    document.getElementById('subscribeModalBody').innerHTML = document.getElementById('subscribeModalBody').innerHTML;
-    modal._planKey = planKey;
-    modal._planLabel = labels[planKey] || planKey;
+    document.getElementById('subscribeModalBody').innerHTML = `
+        <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Full name</label>
+            <input type="text" id="smName" placeholder="Jane Merchant" style="width:100%;padding:9px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom:20px;">
+            <label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Work email</label>
+            <input type="email" id="smEmail" placeholder="you@store.com" style="width:100%;padding:9px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">
+        </div>
+        <div style="display:flex;gap:12px;">
+            <button class="button" style="padding:10px 24px;" onclick="submitSubscribeModal()">Submit request</button>
+            <button class="button button-secondary" style="padding:10px 24px;" onclick="closeSubscribeModal()">Cancel</button>
+        </div>`;
+    modal._planLabel = planLabel;
     modal.style.display = 'flex';
+}
+function openInlineSubscribe(planKey) {
+    const labels = { launch_149:'Launch — $149/mo', growth_299:'Growth — $299/mo', pro_799:'Pro — $799/mo', advanced_1999:'Advanced — $1,999/mo', enterprise:'Enterprise / custom pricing' };
+    openSubscribeModal(planKey, labels[planKey] || planKey);
 }
 function closeSubscribeModal() {
     document.getElementById('subscribeModal').style.display = 'none';
