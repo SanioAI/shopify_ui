@@ -1579,5 +1579,72 @@
             }
         }
     </script>
+
+<!-- Subscribe modal — fixed overlay, works inside Shopify iframe -->
+<div id="subscribeModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:12px;padding:32px;max-width:480px;width:90%;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+        <button onclick="closeSubscribeModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#637381;">✕</button>
+        <h2 style="font-size:20px;font-weight:700;color:#202223;margin:0 0 4px 0;">Request access</h2>
+        <p id="subscribeModalPlan" style="font-size:14px;color:#008060;font-weight:600;margin:0 0 8px 0;"></p>
+        <p style="font-size:14px;color:#637381;margin:0 0 20px 0;">No payment collected here. We'll follow up within 1 business day.</p>
+        <div id="subscribeModalBody">
+            <div style="margin-bottom:14px;">
+                <label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Full name</label>
+                <input type="text" id="smName" placeholder="Jane Merchant" style="width:100%;padding:9px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">
+            </div>
+            <div style="margin-bottom:20px;">
+                <label style="display:block;font-size:13px;font-weight:600;color:#202223;margin-bottom:6px;">Work email</label>
+                <input type="email" id="smEmail" placeholder="you@store.com" style="width:100%;padding:9px 12px;border:1px solid #c9cccf;border-radius:6px;font-size:14px;box-sizing:border-box;">
+            </div>
+            <div style="display:flex;gap:12px;">
+                <button class="button" style="padding:10px 24px;" onclick="submitSubscribeModal()">Submit request</button>
+                <button class="button button-secondary" style="padding:10px 24px;" onclick="closeSubscribeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function openInlineSubscribe(planKey) {
+    const labels = {
+        launch_149: 'Launch — $149/mo',
+        growth_299: 'Growth — $299/mo',
+        pro_799: 'Pro — $799/mo',
+        advanced_1999: 'Advanced — $1,999/mo',
+        enterprise: 'Enterprise / custom pricing'
+    };
+    const modal = document.getElementById('subscribeModal');
+    document.getElementById('subscribeModalPlan').textContent = 'Selected plan: ' + (labels[planKey] || planKey);
+    document.getElementById('smName').value = '';
+    document.getElementById('smEmail').value = '';
+    document.getElementById('subscribeModalBody').innerHTML = document.getElementById('subscribeModalBody').innerHTML;
+    modal._planKey = planKey;
+    modal._planLabel = labels[planKey] || planKey;
+    modal.style.display = 'flex';
+}
+function closeSubscribeModal() {
+    document.getElementById('subscribeModal').style.display = 'none';
+}
+function submitSubscribeModal() {
+    const name = (document.getElementById('smName').value || '').trim();
+    const email = (document.getElementById('smEmail').value || '').trim();
+    if (!name || !email) { alert('Please enter your name and email.'); return; }
+    const modal = document.getElementById('subscribeModal');
+    document.getElementById('subscribeModalBody').innerHTML =
+        '<div style="text-align:center;padding:16px 0;">' +
+        '<div style="font-size:40px;margin-bottom:12px;">✓</div>' +
+        '<p style="font-weight:600;color:#202223;margin:0 0 8px;">Thanks, ' + name + '!</p>' +
+        '<p style="color:#637381;font-size:14px;margin:0 0 16px;">We\'ll reach out to <strong>' + email + '</strong> within 1 business day about the <strong>' + (modal._planLabel||'') + '</strong> plan.</p>' +
+        '<p style="color:#8c9196;font-size:13px;margin:0 0 20px;">Questions? <a href="mailto:shopify@paladio.ai" style="color:#008060;">shopify@paladio.ai</a></p>' +
+        '<button class="button" onclick="closeSubscribeModal()">Done</button>' +
+        '</div>';
+}
+document.getElementById('subscribeModal').addEventListener('click', function(e) {
+    if (e.target === this) closeSubscribeModal();
+});
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSubscribeModal();
+});
+</script>
 </body>
 </html>
