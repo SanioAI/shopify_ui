@@ -1516,11 +1516,24 @@ function openSubscribeModal(planKey, planLabel) {
 function closeSubscribeModal() {
     document.getElementById('subscribeModal').style.display = 'none';
 }
-function submitSubscribeModal() {
+async function submitSubscribeModal() {
     var name = (document.getElementById('smName').value || '').trim();
     var email = (document.getElementById('smEmail').value || '').trim();
     if (!name || !email) { alert('Please enter your name and email.'); return; }
     var modal = document.getElementById('subscribeModal');
+    var plan = modal._planLabel || '';
+    document.getElementById('subscribeModalBody').innerHTML =
+        '<div style="text-align:center;padding:20px 0 8px;">' +
+        '<div style="font-size:32px;margin-bottom:12px;">⏳</div>' +
+        '<p style="font-size:14px;color:#637381;">Sending...</p>' +
+        '</div>';
+    try {
+        await fetch('https://formspree.io/f/xzdqkzpg', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, email: email, plan: plan })
+        });
+    } catch(e) { /* show confirmation regardless */ }
     document.getElementById('subscribeModalBody').innerHTML =
         '<div style="text-align:center;padding:20px 0 8px;">' +
         '<div style="font-size:44px;margin-bottom:14px;">✓</div>' +
