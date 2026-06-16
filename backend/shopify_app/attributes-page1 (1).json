@@ -1,0 +1,527 @@
+{
+  "job_id": "csv_batch_demo_1773195873",
+  "status": "succeeded",
+  "filters": {
+    "category": null
+  },
+  "pagination": {
+    "page": 1,
+    "page_size": 55,
+    "total_items": 109,
+    "total_pages": 2
+  },
+  "items": [
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Dog Supplies",
+      "bucket": "feature",
+      "attribute": "features",
+      "examples": [
+        "healing plush toys, squeakers, hidden treats pocket"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Dog Supplies",
+      "bucket": "marketing",
+      "attribute": "squeaky",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Dog Supplies",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "plush"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Dog Supplies",
+      "bucket": "other",
+      "attribute": "treat_dispenser",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Dog Supplies",
+      "bucket": "usage",
+      "attribute": "intended_use",
+      "examples": [
+        "relieve anxiety and tension, increase the fun of life together"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "bucket": "compliance",
+      "attribute": "reinforced_stitching",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "bucket": "compliance",
+      "attribute": "safety_leash_hook",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "bucket": "feature",
+      "attribute": "special_features",
+      "examples": [
+        "Durable and robust design, Reinforced cross stitching, Thick webbing, Variety of color options"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "bucket": "material",
+      "attribute": "breathable_fabric",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "bucket": "material",
+      "attribute": "color",
+      "examples": [
+        "Mint Green"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "bucket": "material",
+      "attribute": "color_family",
+      "examples": [
+        "Green"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "bucket": "other",
+      "attribute": "padded_handle",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Activewear",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Spyder"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Activewear",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "SWK033-P12_MBU"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Activewear",
+      "bucket": "material",
+      "attribute": "color",
+      "examples": [
+        "Black",
+        "Mist Blue"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Activewear",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "88% Polyester, 12% Spandex",
+        "51% Polyester, 43% Rayon, 6% Elastane"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Activewear",
+      "bucket": "material",
+      "attribute": "style",
+      "examples": [
+        "Harmony Boxy Crop Top",
+        "Weekender Space Dye Jersey Polo Shirt"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Baby & Toddler Clothing",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Little"
+      ],
+      "matched_products": 6
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Baby & Toddler Clothing",
+      "bucket": "dimension",
+      "attribute": "size",
+      "examples": [
+        "3 to 6 months"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Baby & Toddler Clothing",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "100% combed ring-spun cotton",
+        "100% ring-spun combed cotton",
+        "USA cotton"
+      ],
+      "matched_products": 7
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Baby & Toddler Clothing",
+      "bucket": "material",
+      "attribute": "style",
+      "examples": [
+        "Hotdish Baby Onesie",
+        "Mardi Gras Unicorn Baby Onesie",
+        "Southern Gentleman Baby Onesie",
+        "Colorado Baby Onesie",
+        "Washington Sq Park Print Bodysuit"
+      ],
+      "matched_products": 7
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Pajamas",
+      "bucket": "dimension",
+      "attribute": "size",
+      "examples": [
+        "Snug fitting"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Pajamas",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "100% Soft Ribbed Cotton"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Pajamas",
+      "bucket": "material",
+      "attribute": "style",
+      "examples": [
+        "Short Sleeve"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Shorts",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Spyder"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Shorts",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "Villa Pull-On Cotton Shorts",
+        "Cotton Pull-On Shorts"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Shorts",
+      "bucket": "material",
+      "attribute": "color",
+      "examples": [
+        "White",
+        "Mushroom",
+        "Peach Bud"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Shorts",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "100% Cotton"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Shorts",
+      "bucket": "material",
+      "attribute": "style",
+      "examples": [
+        "Pull-On, Casual"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Shorts",
+      "bucket": "other",
+      "attribute": "care_instructions",
+      "examples": [
+        "Machine Wash"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Hats",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Bullstrap"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Hats",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "EYJ Badge 5-Panel Hat"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Hats",
+      "bucket": "material",
+      "attribute": "color",
+      "examples": [
+        "Tan"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Hats",
+      "bucket": "material",
+      "attribute": "style",
+      "examples": [
+        "5-Panel"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Neck Gaiters",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Back"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Neck Gaiters",
+      "bucket": "dimension",
+      "attribute": "size",
+      "examples": [
+        "One size fits all"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Neck Gaiters",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "Active Cooling Fabric"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Neck Gaiters",
+      "bucket": "material",
+      "attribute": "style",
+      "examples": [
+        "Cooling Neck Gaiter"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Neck Gaiters",
+      "bucket": "other",
+      "attribute": "care_instructions",
+      "examples": [
+        "Machine Washable and Reusable"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "bucket": "codes",
+      "attribute": "is_convertible",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 4
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "bucket": "core",
+      "attribute": "age_group",
+      "examples": [
+        "newborn"
+      ],
+      "matched_products": 4
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "bucket": "core",
+      "attribute": "gender",
+      "examples": [
+        "unisex"
+      ],
+      "matched_products": 4
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "bucket": "feature",
+      "attribute": "features",
+      "examples": [
+        "2-in-1 burp cloth and bib, snap closure, machine washable"
+      ],
+      "matched_products": 4
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "bucket": "feature",
+      "attribute": "special_features",
+      "examples": [
+        "5 layers of thickness"
+      ],
+      "matched_products": 4
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "Bamboo rayon, cotton muslin"
+      ],
+      "matched_products": 4
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "bucket": "other",
+      "attribute": "care_instructions",
+      "examples": [
+        "Machine Washable"
+      ],
+      "matched_products": 4
+    },
+    {
+      "category": "Baby & Toddler > Swaddling & Receiving Blankets > Swaddling Blankets",
+      "bucket": "core",
+      "attribute": "age_group",
+      "examples": [
+        "newborn"
+      ],
+      "matched_products": 8
+    },
+    {
+      "category": "Baby & Toddler > Swaddling & Receiving Blankets > Swaddling Blankets",
+      "bucket": "dimension",
+      "attribute": "height",
+      "examples": [
+        "47"
+      ],
+      "matched_products": 8
+    },
+    {
+      "category": "Baby & Toddler > Swaddling & Receiving Blankets > Swaddling Blankets",
+      "bucket": "dimension",
+      "attribute": "width",
+      "examples": [
+        "47"
+      ],
+      "matched_products": 8
+    },
+    {
+      "category": "Baby & Toddler > Swaddling & Receiving Blankets > Swaddling Blankets",
+      "bucket": "feature",
+      "attribute": "special_features",
+      "examples": [
+        "Extra Soft, Machine Washable, Breathable Fabric to Help Prevent Overheating"
+      ],
+      "matched_products": 8
+    },
+    {
+      "category": "Baby & Toddler > Swaddling & Receiving Blankets > Swaddling Blankets",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "Muslin Bamboo & Organic Cotton"
+      ],
+      "matched_products": 8
+    },
+    {
+      "category": "Baby & Toddler > Swaddling & Receiving Blankets > Swaddling Blankets",
+      "bucket": "material",
+      "attribute": "theme",
+      "examples": [
+        "Dapper Napper",
+        "Florida",
+        "Maryland",
+        "Washington D.C.",
+        "Heads and Tails"
+      ],
+      "matched_products": 8
+    },
+    {
+      "category": "Electronics > Audio > Headphones & Headsets",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Sway"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Electronics > Audio > Headphones & Headsets",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "True Wireless Headphones"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Electronics > Communications > Mobile Phone Accessories",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "ITskins",
+        "AMPD"
+      ],
+      "matched_products": 2
+    }
+  ]
+}

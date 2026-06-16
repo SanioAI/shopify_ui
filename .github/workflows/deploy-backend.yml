@@ -1,0 +1,38 @@
+name: Deploy Backend to ECS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push image
+        run: |
+          docker build -f backend/Dockerfile \
+            -t 441940082910.dkr.ecr.us-east-1.amazonaws.com/catalog-agents-api-backend:latest \
+            backend/
+          docker push 441940082910.dkr.ecr.us-east-1.amazonaws.com/catalog-agents-api-backend:latest
+
+      - name: Force ECS redeployment
+        run: |
+          aws ecs update-service \
+            --cluster catalog-agents-prod-shopify \
+            --service catalog-agents-api-service2 \
+            --force-new-deployment \
+            --region us-east-1

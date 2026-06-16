@@ -1,0 +1,515 @@
+{
+  "job_id": "csv_batch_demo_1773195873",
+  "status": "succeeded",
+  "filters": {
+    "category": null
+  },
+  "pagination": {
+    "page": 2,
+    "page_size": 55,
+    "total_items": 109,
+    "total_pages": 2
+  },
+  "items": [
+    {
+      "category": "Electronics > Communications > Mobile Phone Accessories",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "Samsung Galaxy A16 5G",
+        "iPhone 16 Pro"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Electronics > Communications > Telephony",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "ITskins",
+        "AMPD",
+        "AXS"
+      ],
+      "matched_products": 5
+    },
+    {
+      "category": "Electronics > Communications > Telephony",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "Clear MagSafe Case for iPhone 16 Plus",
+        "Ultra Clear MagSafe Case & Screen Protector for iPhone 15",
+        "Hybrid_R Clear MagSafe Case for iPhone 16",
+        "Hybrid_R Silk MagSafe Case for iPhone 14/13",
+        "DuraBump MagSafe Case for iPhone 16 Pro"
+      ],
+      "matched_products": 5
+    },
+    {
+      "category": "Electronics > Communications > Telephony",
+      "bucket": "material",
+      "attribute": "color",
+      "examples": [
+        "Clear"
+      ],
+      "matched_products": 5
+    },
+    {
+      "category": "Electronics > Computers > Tablet Computers",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Contixo"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Electronics > Computers > Tablet Computers",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "K80A 8\" Kids Educational Tablet"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Electronics > Electronics Accessories > Cables",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Ventev"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Electronics > Electronics Accessories > Cables",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "Helix",
+        "Alloy"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Electronics > Electronics Accessories > Cables",
+      "bucket": "dimension",
+      "attribute": "dimensions",
+      "examples": [
+        "length: 3",
+        "length: 4"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Electronics > Electronics Accessories > Electronics Films & Shields",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "AXS",
+        "LAUT"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Electronics > Electronics Accessories > Electronics Films & Shields",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "PROTech Plus Case & ARMORGlass Screen Protector for Motorola Moto G Play (2024)",
+        "KEV Protect MagSafe Case for iPhone 16 Pro"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Health & Beauty > Personal Care > Oral Care",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Byredo",
+        "Ombré"
+      ],
+      "matched_products": 3
+    },
+    {
+      "category": "Health & Beauty > Personal Care > Oral Care",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "Mumbai Noise"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Health & Beauty > Personal Care > Oral Care",
+      "bucket": "core",
+      "attribute": "package_type",
+      "examples": [
+        "Spray"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Health & Beauty > Personal Care > Oral Care",
+      "bucket": "dimension",
+      "attribute": "package_quantity",
+      "examples": [
+        "1"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Health & Beauty > Personal Care > Oral Care",
+      "bucket": "other",
+      "attribute": "ingredients",
+      "examples": [
+        "Calcium Carbonate, Mint, Microcrystalline Cellulose, Sodium Cocoyl Isethionate, Lactose, Silicon Dioxide, Saccharin, Sucralose, Sodium Bicarbonate, Xylitol, Erythritol, Menthol, Eucalyptol, Magnesium Stearate"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Health & Beauty > Personal Care > Oral Care",
+      "bucket": "other",
+      "attribute": "usage_instructions",
+      "examples": [
+        "Chew 1-2 tablets, wet your toothbrush and brush. Use daily."
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "core",
+      "attribute": "base_type",
+      "examples": [
+        "E26"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "XODO"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "LB1"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "feature",
+      "attribute": "connectivity",
+      "examples": [
+        "Wi-Fi"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "feature",
+      "attribute": "dimmable",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "feature",
+      "attribute": "smart_features",
+      "examples": [
+        "App Controlled, Voice Control with Alexa, Scheduling, Color Change Sync to Music"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "feature",
+      "attribute": "special_features",
+      "examples": [
+        "Multi-colored, Programmable scenes"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "material",
+      "attribute": "color",
+      "examples": [
+        "RGB"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "material",
+      "attribute": "color_changing",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "technical",
+      "attribute": "voltage",
+      "examples": [
+        "120"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "bucket": "usage",
+      "attribute": "usage_instructions",
+      "examples": [
+        "Download the Xodo Smart App to control the bulb."
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Home & Garden > Linens & Bedding > Towels",
+      "bucket": "compatibility",
+      "attribute": "assembly_required",
+      "examples": [
+        "false"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Home & Garden > Linens & Bedding > Towels",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Sunkissed"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Home & Garden > Linens & Bedding > Towels",
+      "bucket": "core",
+      "attribute": "model",
+      "examples": [
+        "El Nido",
+        "Jaipur"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Home & Garden > Linens & Bedding > Towels",
+      "bucket": "dimension",
+      "attribute": "dimensions",
+      "examples": [
+        "width: 180, length: 220",
+        "width: 100, length: 180"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Home & Garden > Linens & Bedding > Towels",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "100% Premium Turkish Cotton"
+      ],
+      "matched_products": 2
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "compliance",
+      "attribute": "stadium_approved",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "core",
+      "attribute": "age_group",
+      "examples": [
+        "kids"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Contixo"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "dimension",
+      "attribute": "depth",
+      "examples": [
+        "13.77"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "dimension",
+      "attribute": "height",
+      "examples": [
+        "16.92"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "dimension",
+      "attribute": "weight",
+      "examples": [
+        "1.71"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "dimension",
+      "attribute": "width",
+      "examples": [
+        "6.69"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "feature",
+      "attribute": "special_features",
+      "examples": [
+        "clear design, multiple pockets, durable construction, lightweight"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "material",
+      "attribute": "material",
+      "examples": [
+        "PVC"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "bucket": "usage",
+      "attribute": "intended_use",
+      "examples": [
+        "stadium events, school, travel"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "compatibility",
+      "attribute": "compatibility",
+      "examples": [
+        "Apple devices"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "compliance",
+      "attribute": "certifications",
+      "examples": [
+        "MFi-Certified"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "compliance",
+      "attribute": "mfi_certified",
+      "examples": [
+        "true"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "core",
+      "attribute": "brand",
+      "examples": [
+        "Ventev"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "feature",
+      "attribute": "connectivity",
+      "examples": [
+        "USB-A"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "feature",
+      "attribute": "features",
+      "examples": [
+        "Small size, Cable with 2x the copper for faster charging"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "other",
+      "attribute": "warranty",
+      "examples": [
+        "Lifetime Warranty"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "technical",
+      "attribute": "charging_speed",
+      "examples": [
+        "2x faster than a standard 5W charger"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "technical",
+      "attribute": "voltage",
+      "examples": [
+        "12"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "technical",
+      "attribute": "wattage",
+      "examples": [
+        "12"
+      ],
+      "matched_products": 1
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "bucket": "usage",
+      "attribute": "engineered_in",
+      "examples": [
+        "USA"
+      ],
+      "matched_products": 1
+    }
+  ]
+}

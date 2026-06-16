@@ -1,0 +1,124 @@
+O{
+  "job_id": "csv_batch_demo_1773775479",
+  "items": [
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Grooming Supplies",
+      "product_id": "9343076892916",
+      "optimized_title": "All-Natural Paw Balm for Dogs & Cats - Moisturizes & Protects Paws",
+      "optimized_description": "Discover the ultimate care for your pet's paws with our All-Natural Paw Balm. This balm is crafted with shea butter, cocoa butter, and beeswax to provide deep moisturization and a protective barrier against rough surfaces and extreme temperatures. Infused with sunflower, almond, grapeseed, and avocado oils, it nourishes and revitalizes your pet's paws. Aloe vera oil soothes and relieves minor irritations, making it perfect for both dogs and cats. Free from harmful chemicals, our balm ensures safe and effective paw care. Keep your pet's paws healthy and comfortable with our natural solution.",
+      "attributes": {
+        "ingredients": "shea butter, cocoa butter, beeswax, sunflower oil, almond oil, grapeseed oil, avocado oil, aloe vera oil",
+        "suitable_for": "dogs, cats",
+        "special_features": "Deep moisturization, protective barrier, soothing relief"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Baby & Toddler Clothing",
+      "product_id": "9343081742580",
+      "optimized_title": "Unique Arkansas Chocolate Gravy Baby Onesie - Soft Cotton Bodysuit for 3-6 Months",
+      "optimized_description": "Celebrate your Arkansas roots with this unique Chocolate Gravy Baby Onesie, designed for infants aged 3-6 months. Made from ultra-soft 100% combed ring-spun cotton, this bodysuit offers comfort and style. Inspired by the beloved Arkansas biscuits and gravy, it makes a perfect gift for baby showers. Each piece is custom-designed and printed in Louisiana, using USA-sourced materials. Enjoy free shipping across the contiguous 48 U.S. states, with delivery in about two weeks. We guarantee your satisfaction with this special hometown-themed baby apparel.",
+      "attributes": {
+        "brand": "Little",
+        "size": "{\"value\": \"3 to 6\", \"unit\": \"months\"}",
+        "material": "100% combed ring-spun cotton",
+        "style": "onesie"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Sunglasses",
+      "product_id": "9343074762996",
+      "optimized_title": "Air Force Aviator Sunglasses - Mirror Yellow Lens & UV Protection",
+      "optimized_description": "Discover the ultimate in eyewear with Air Force Aviator Sunglasses. Featuring a mirror yellow lens and deluxe silver mirror coating, these sunglasses provide maximum UV protection while ensuring a stylish appearance. Perfect for fashion-forward individuals who prioritize eye safety and comfort. Elevate your accessory game with these meticulously designed sunglasses.",
+      "attributes": {
+        "brand": "Air",
+        "color": "Mirror Yellow",
+        "style": "Aviator"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Jewelry > Bracelets",
+      "product_id": "9343074238708",
+      "optimized_title": "Elegant 1.0 Cttw Princess Diamond Tennis Bracelet - 14K White Gold",
+      "optimized_description": "Discover the allure of our 14K White Gold Tennis Bracelet, adorned with 1.0 Cttw of Princess Diamonds. The invisible setting creates a seamless brilliance, while the 7.25\" design ensures a perfect fit. Ideal for modern women who appreciate classic elegance.",
+      "attributes": {
+        "color": "White Gold",
+        "size": "{\"value\": 7.25, \"unit\": \"inches\"}",
+        "material": "14K White Gold",
+        "style": "Tennis Bracelet"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Jewelry > Bracelets",
+      "product_id": "9343074533620",
+      "optimized_title": "Sophisticated 14K Rose Gold Bead Cuff Bangle - 3mm High Polish",
+      "optimized_description": "Add a unique touch to your jewelry collection with our 14K Rose Gold Bead Cuff Bangle. Featuring a high polish finish and a 3mm width, this bangle is ideal for both layering and standalone wear. Weighing 5.7 grams, it offers a perfect balance of elegance and style.",
+      "attributes": {
+        "color": "Rose Gold",
+        "weight": "5.7",
+        "material": "14K Rose Gold",
+        "style": "Bead Cuff Bangle"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Jewelry > Charms & Pendants",
+      "product_id": "9343074107636",
+      "optimized_title": "Elegant Pink Heart Diamond Necklace in 14K White Gold",
+      "optimized_description": "Discover the elegance of a pink heart-shaped lab-grown diamond necklace, set in 14K white gold. This stunning piece features a brilliant diamond in a 3-prong martini setting, suspended from an 18-inch box chain. Perfect for gifting or personal wear, it embodies timeless beauty and sophistication.",
+      "attributes": {
+        "color": "pink",
+        "size": "{\"value\": 18, \"unit\": \"inches\"}",
+        "material": "14K white gold",
+        "style": "solitaire, heart-shaped"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Jewelry > Charms & Pendants",
+      "product_id": "9343074205940",
+      "optimized_title": "Chic Diamond Flower Pendant Necklace in 14K White Gold",
+      "optimized_description": "Embrace elegance with this diamond flower pendant necklace, crafted in 14K white gold. Featuring 7 round-cut diamonds in a stunning floral design, this piece is suspended from an 18-inch box chain. With a total weight of 2.00 cttw, it is perfect for gifting or adding to your personal collection.",
+      "attributes": {
+        "color": "clear",
+        "size": "{\"value\": 18, \"unit\": \"inches\"}",
+        "material": "14K white gold",
+        "style": "floral design"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Jewelry > Earrings",
+      "product_id": "9343074730228",
+      "optimized_title": "Classic 10k Yellow Gold Hoop Earrings - 25mm with Snap Lock",
+      "optimized_description": "Discover the elegance of 10k yellow gold with these polished hoop earrings, designed with a secure snap lock backing. Measuring 25mm in diameter, they are perfect for adding a touch of sophistication to any outfit. Ideal for everyday wear or special occasions.",
+      "attributes": {
+        "color": "Yellow Gold",
+        "weight": "1.6",
+        "dimensions": "{\"diameter\": \"25mm\", \"length\": \"0.98 in\", \"width\": \"0.12 in\"}",
+        "material": "10K Yellow Gold",
+        "style": "Polished Hoop Earrings"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Jewelry > Earrings",
+      "product_id": "9343075057908",
+      "optimized_title": "Modern 14K White Gold Chain Hoop Earrings with Pushback",
+      "optimized_description": "Embrace modern elegance with these 14k white gold chain hoop earrings. Featuring a unique link design and secured with pushback clasps, they are perfect for adding a touch of sophistication to any ensemble. Ideal for both casual and formal occasions.",
+      "attributes": {
+        "color": "White Gold",
+        "weight": "1.6",
+        "dimensions": "{\"length\": \"13.90 mm\", \"width\": \"15.40 mm\"}",
+        "material": "14K White Gold",
+        "style": "Delicate Chain Hoop Earrings"
+      }
+    },
+    {
+      "category": "Apparel & Accessories > Jewelry > Necklaces",
+      "product_id": "9343074173172",
+      "optimized_title": "Elegant 0.75 Cttw Blue Diamond Necklace in Sterling Silver",
+      "optimized_description": "Discover the allure of our 0.75 Cttw Blue Diamond Necklace, expertly crafted in sterling silver. This piece features 14 bezel-set blue diamonds, offering a unique blend of elegance and color. Ideal for any occasion, this necklace is a must-have addition to your jewelry collection.",
+      "attributes": {
+        "color": "Blue",
+        "material": "Sterling Silver",
+        "style": "Elegant Jewelry"
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "job_id": "csv_batch_demo_1773195873",
+  "status": "succeeded",
+  "pagination": {
+    "page": 1,
+    "page_size": 30,
+    "total_items": 21,
+    "total_pages": 1
+  },
+  "items": [
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Dog Supplies",
+      "products_count": 1,
+      "dynamic_attributes_count": 5
+    },
+    {
+      "category": "Animals & Pet Supplies > Pet Supplies > Pet Leash Extensions",
+      "products_count": 1,
+      "dynamic_attributes_count": 7
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Activewear",
+      "products_count": 2,
+      "dynamic_attributes_count": 5
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Baby & Toddler Clothing",
+      "products_count": 7,
+      "dynamic_attributes_count": 4
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Pajamas",
+      "products_count": 1,
+      "dynamic_attributes_count": 3
+    },
+    {
+      "category": "Apparel & Accessories > Clothing > Shorts",
+      "products_count": 3,
+      "dynamic_attributes_count": 6
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Hats",
+      "products_count": 1,
+      "dynamic_attributes_count": 4
+    },
+    {
+      "category": "Apparel & Accessories > Clothing Accessories > Neck Gaiters",
+      "products_count": 1,
+      "dynamic_attributes_count": 5
+    },
+    {
+      "category": "Baby & Toddler > Nursing & Feeding > Burp Cloths",
+      "products_count": 4,
+      "dynamic_attributes_count": 7
+    },
+    {
+      "category": "Baby & Toddler > Swaddling & Receiving Blankets > Swaddling Blankets",
+      "products_count": 8,
+      "dynamic_attributes_count": 6
+    },
+    {
+      "category": "Electronics > Audio > Headphones & Headsets",
+      "products_count": 1,
+      "dynamic_attributes_count": 2
+    },
+    {
+      "category": "Electronics > Communications > Mobile Phone Accessories",
+      "products_count": 2,
+      "dynamic_attributes_count": 2
+    },
+    {
+      "category": "Electronics > Communications > Telephony",
+      "products_count": 5,
+      "dynamic_attributes_count": 3
+    },
+    {
+      "category": "Electronics > Computers > Tablet Computers",
+      "products_count": 1,
+      "dynamic_attributes_count": 2
+    },
+    {
+      "category": "Electronics > Electronics Accessories > Cables",
+      "products_count": 2,
+      "dynamic_attributes_count": 3
+    },
+    {
+      "category": "Electronics > Electronics Accessories > Electronics Films & Shields",
+      "products_count": 2,
+      "dynamic_attributes_count": 2
+    },
+    {
+      "category": "Health & Beauty > Personal Care > Oral Care",
+      "products_count": 3,
+      "dynamic_attributes_count": 6
+    },
+    {
+      "category": "Home & Garden > Lighting > LED Light Bulbs",
+      "products_count": 1,
+      "dynamic_attributes_count": 11
+    },
+    {
+      "category": "Home & Garden > Linens & Bedding > Towels",
+      "products_count": 2,
+      "dynamic_attributes_count": 5
+    },
+    {
+      "category": "Luggage & Bags > Backpacks",
+      "products_count": 1,
+      "dynamic_attributes_count": 10
+    },
+    {
+      "category": "Vehicles & Parts > Vehicle Parts & Accessories > Vehicle Battery Chargers",
+      "products_count": 1,
+      "dynamic_attributes_count": 11
+    }
+  ]
+}

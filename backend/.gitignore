@@ -1,0 +1,5 @@
+.env
+*.enc
+__pycache__/
+*.pyc
+shopify_app/.shopify_tokens.enc
