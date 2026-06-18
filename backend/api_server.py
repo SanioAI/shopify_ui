@@ -1,5 +1,5 @@
 """
-Flask Backend API for Catalog AI Direct Shopify App
+Flask Backend API for Catalog AI Direct Shopify App — offline token fix
 ===================================================
 
 This API connects the Shopify App UI to the catalog enrichment scripts.
