@@ -126,8 +126,11 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
         access_token = data.get('access_token')
         expires_in = data.get('expires_in')
         if access_token:
-            from shopify_token_store import save_token
-            save_token(shop, access_token, expires_in=expires_in)
+            try:
+                from shopify_token_store import save_token
+                save_token(shop, access_token, expires_in=expires_in)
+            except Exception:
+                pass
             return shop, access_token
     except Exception:
         pass
