@@ -28,12 +28,7 @@ def get_api_version() -> str:
 
 
 def get_scopes() -> str:
-    # Minimal for typical catalog work: products read/write; listings if you sync sales channels.
-    # Tighten in Partner Dashboard to match and remove unused scopes before App Store review.
-    return _env(
-        "SHOPIFY_SCOPES",
-        "read_products,write_products,read_product_listings,write_product_listings",
-    )
+    return _env("SHOPIFY_SCOPES", "read_products,write_products")
 
 
 def get_oauth_client_id() -> str:
