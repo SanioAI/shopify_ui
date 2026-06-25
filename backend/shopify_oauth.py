@@ -63,6 +63,26 @@ mutation metafieldDefinitionCreate($definition: MetafieldDefinitionInput!) {
 """
 
 
+_COMPLIANCE_WEBHOOKS = [
+    ("customers/data_request", "https://catalog.paladio.ai/webhooks/customers/data_request"),
+    ("customers/redact",       "https://catalog.paladio.ai/webhooks/customers/redact"),
+    ("shop/redact",            "https://catalog.paladio.ai/webhooks/shop/redact"),
+]
+
+
+def _register_compliance_webhooks_bg(shop: str, token: str, api_version: str) -> None:
+    url = f"https://{shop}/admin/api/{api_version}/webhooks.json"
+    headers = {"X-Shopify-Access-Token": token, "Content-Type": "application/json"}
+    for topic, address in _COMPLIANCE_WEBHOOKS:
+        try:
+            requests.post(url, headers=headers, json={
+                "webhook": {"topic": topic, "address": address, "format": "json"}
+            }, timeout=15)
+        except Exception:
+            pass
+        time.sleep(0.2)
+
+
 def _create_paladio_metafields_bg(shop: str, token: str, api_version: str) -> None:
     """Create all paladio.* metafield definitions. Safe to call multiple times (skips existing)."""
     url = f"https://{shop}/admin/api/{api_version}/graphql.json"
@@ -320,6 +340,13 @@ def oauth_callback():
     # Create paladio.* metafield definitions in background (safe to re-run, skips existing)
     threading.Thread(
         target=_create_paladio_metafields_bg,
+        args=(shop, access_token, get_api_version()),
+        daemon=True,
+    ).start()
+
+    # Register mandatory GDPR compliance webhooks
+    threading.Thread(
+        target=_register_compliance_webhooks_bg,
         args=(shop, access_token, get_api_version()),
         daemon=True,
     ).start()
