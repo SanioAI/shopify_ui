@@ -109,7 +109,7 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
     try:
         resp = requests.post(
             f"https://{shop}/admin/oauth/access_token",
-            json={
+            data={
                 "client_id": client_id,
                 "client_secret": client_secret,
                 "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
@@ -117,7 +117,7 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
                 "subject_token_type": "urn:ietf:params:oauth:token-type:id_token",
                 "requested_token_type": "urn:shopify:params:oauth:token-type:offline-access-token",
             },
-            headers={"Accept": "application/json"},
+            headers={"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
             timeout=15,
         )
         if resp.status_code != 200:
