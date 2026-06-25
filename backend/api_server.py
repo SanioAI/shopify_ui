@@ -120,7 +120,6 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
             headers={"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
             timeout=15,
         )
-        print(f"[token_exchange] shop={shop} status={resp.status_code} body={resp.text[:300]}", flush=True)
         if resp.status_code != 200:
             return None, None
         data = resp.json()
@@ -133,8 +132,8 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
             except Exception:
                 pass
             return shop, access_token
-    except Exception as e:
-        print(f"[token_exchange] exception: {e}", flush=True)
+    except Exception:
+        pass
     return None, None
 
 
@@ -144,13 +143,12 @@ def _shopify_context():
     # App Bridge session token that's already in the Authorization header.
     try:
         auth_header = request.headers.get('Authorization', '')
-        print(f"[shopify_context] auth_header prefix={auth_header[:30]!r}", flush=True)
         if auth_header.startswith('Bearer eyJ'):
             shop, token = _try_session_token_exchange(auth_header[7:])
             if shop and token:
                 return shop, token, get_api_version()
-    except Exception as e:
-        print(f"[shopify_context] exception: {e}", flush=True)
+    except Exception:
+        pass
 
     store, token = get_effective_shopify_credentials()
     if not store or not token:
@@ -711,24 +709,6 @@ def writeback():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
-
-@app.route("/api/debug/shopify", methods=["GET"])
-def debug_shopify():
-    ctx = _shopify_context()
-    if not ctx:
-        return jsonify({"error": "no credentials"}), 503
-    store, token, api_version = ctx
-    import requests as _req
-    url = f"https://{store}/admin/api/{api_version}/products.json?limit=1"
-    r = _req.get(url, headers={"X-Shopify-Access-Token": token}, timeout=15)
-    return jsonify({
-        "store": store,
-        "api_version": api_version,
-        "token_prefix": token[:8] + "...",
-        "status": r.status_code,
-        "body": r.json() if r.headers.get("content-type","").startswith("application/json") else r.text[:500],
-        "headers": dict(r.headers),
-    })
 
 
 @app.route("/api/agents", methods=["GET"])
