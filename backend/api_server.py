@@ -688,21 +688,38 @@ def get_agents():
 
 
 # ── Shopify mandatory GDPR webhooks ──────────────────────────────────────────
-# Shopify calls these when a merchant/customer requests data deletion or export.
-# We don't store personal data, so we acknowledge immediately and return 200.
+import hmac as _hmac
+import hashlib as _hashlib
+
+
+def _verify_shopify_webhook(req) -> bool:
+    secret = (os.environ.get("SHOPIFY_API_SECRET") or "").strip()
+    if not secret:
+        return False
+    signature = req.headers.get("X-Shopify-Hmac-Sha256", "")
+    digest = _hmac.new(secret.encode("utf-8"), req.get_data(), _hashlib.sha256).digest()
+    expected = base64.b64encode(digest).decode()
+    return _hmac.compare_digest(expected, signature)
+
 
 @app.route("/webhooks/customers/redact", methods=["POST"])
 def gdpr_customers_redact():
+    if not _verify_shopify_webhook(request):
+        return jsonify({"error": "Unauthorized"}), 401
     return jsonify({"acknowledged": True}), 200
 
 
 @app.route("/webhooks/customers/data_request", methods=["POST"])
 def gdpr_customers_data_request():
+    if not _verify_shopify_webhook(request):
+        return jsonify({"error": "Unauthorized"}), 401
     return jsonify({"acknowledged": True}), 200
 
 
 @app.route("/webhooks/shop/redact", methods=["POST"])
 def gdpr_shop_redact():
+    if not _verify_shopify_webhook(request):
+        return jsonify({"error": "Unauthorized"}), 401
     return jsonify({"acknowledged": True}), 200
 
 
