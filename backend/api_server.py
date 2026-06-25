@@ -83,7 +83,70 @@ def _get_catalog_auth_headers():
     return headers
 
 
+def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | None]:
+    """Exchange an App Bridge session token (JWT) for an expiring offline access token."""
+    try:
+        import base64 as _b64
+        import json as _json
+        parts = session_token.split('.')
+        if len(parts) < 2:
+            return None, None
+        payload_b64 = parts[1] + '=' * (4 - len(parts[1]) % 4)
+        payload = _json.loads(_b64.urlsafe_b64decode(payload_b64))
+        dest = payload.get('dest', '')
+        shop = dest.replace('https://', '').replace('http://', '').rstrip('/')
+        if not shop.endswith('.myshopify.com'):
+            return None, None
+    except Exception:
+        return None, None
+
+    from shopify_config import get_oauth_client_id, get_oauth_client_secret
+    client_id = get_oauth_client_id()
+    client_secret = get_oauth_client_secret()
+    if not client_id or not client_secret:
+        return None, None
+
+    try:
+        resp = requests.post(
+            f"https://{shop}/admin/oauth/access_token",
+            json={
+                "client_id": client_id,
+                "client_secret": client_secret,
+                "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
+                "subject_token": session_token,
+                "subject_token_type": "urn:ietf:params:oauth:token-type:id_token",
+                "requested_token_type": "urn:shopify:params:oauth:token-type:offline-access-token",
+            },
+            headers={"Accept": "application/json"},
+            timeout=15,
+        )
+        if resp.status_code != 200:
+            return None, None
+        data = resp.json()
+        access_token = data.get('access_token')
+        expires_in = data.get('expires_in')
+        if access_token:
+            from shopify_token_store import save_token
+            save_token(shop, access_token, expires_in=expires_in)
+            return shop, access_token
+    except Exception:
+        pass
+    return None, None
+
+
 def _shopify_context():
+    # When called from an embedded app request, try token exchange first.
+    # This gives us an expiring offline token (accepted by Shopify) from the
+    # App Bridge session token that's already in the Authorization header.
+    try:
+        auth_header = request.headers.get('Authorization', '')
+        if auth_header.startswith('Bearer eyJ'):
+            shop, token = _try_session_token_exchange(auth_header[7:])
+            if shop and token:
+                return shop, token, get_api_version()
+    except Exception:
+        pass
+
     store, token = get_effective_shopify_credentials()
     if not store or not token:
         return None
@@ -458,12 +521,12 @@ def run_enrichment():
         )
 
     except requests.HTTPError as e:
-        if e.response is not None and e.response.status_code == 401:
+        if e.response is not None and e.response.status_code in (401, 403):
             shop_domain = store if store else (os.environ.get("SHOPIFY_STORE_URL") or "").strip()
             install_url = f"/oauth/install?shop={shop_domain}" if shop_domain else "/oauth/install"
             return jsonify({
                 "success": False,
-                "error": "Shopify token expired. Please reconnect the app.",
+                "error": "Shopify token rejected. Please reconnect the app.",
                 "reconnect": True,
                 "install_url": install_url,
             }), 401

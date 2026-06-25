@@ -62,6 +62,13 @@ def shopify_request(
             time.sleep(wait)
             continue
 
+        if last.status_code in (401, 403):
+            err = requests.HTTPError(
+                f"{last.status_code} {last.reason}: {last.text[:500]}",
+                response=last,
+            )
+            raise err
+
         last.raise_for_status()
         return last
 
