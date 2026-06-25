@@ -11,6 +11,14 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  AWS_REGION: us-east-1
+  ECR_IMAGE: 441940082910.dkr.ecr.us-east-1.amazonaws.com/catalog-agents-api-backend:latest
+  ECS_CLUSTER: catalog-agents-prod-shopify
+  ECS_SERVICE: catalog-agents-api-service2
+  ECS_TASK_FAMILY: catalog-agents-api-shopify
+  ECS_CONTAINER: catalog-agents-api-backend
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -29,14 +37,30 @@ jobs:
       - name: Build and push image
         run: |
           docker build -f backend/Dockerfile \
-            -t 441940082910.dkr.ecr.us-east-1.amazonaws.com/catalog-agents-api-backend:latest \
+            -t ${{ env.ECR_IMAGE }} \
             backend/
-          docker push 441940082910.dkr.ecr.us-east-1.amazonaws.com/catalog-agents-api-backend:latest
+          docker push ${{ env.ECR_IMAGE }}
 
-      - name: Force ECS redeployment
+      - name: Download current task definition
         run: |
-          aws ecs update-service \
-            --cluster catalog-agents-prod-shopify \
-            --service catalog-agents-api-service2 \
-            --force-new-deployment \
-            --region us-east-1
+          aws ecs describe-task-definition \
+            --task-definition ${{ env.ECS_TASK_FAMILY }} \
+            --region ${{ env.AWS_REGION }} \
+            --query taskDefinition \
+            --output json > task-def.json
+
+      - name: Update image in task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-def.json
+          container-name: ${{ env.ECS_CONTAINER }}
+          image: ${{ env.ECR_IMAGE }}
+
+      - name: Deploy new task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
