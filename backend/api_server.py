@@ -120,6 +120,7 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
             headers={"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
             timeout=15,
         )
+        print(f"[token_exchange] shop={shop} status={resp.status_code} body={resp.text[:300]}", flush=True)
         if resp.status_code != 200:
             return None, None
         data = resp.json()
@@ -132,8 +133,8 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
             except Exception:
                 pass
             return shop, access_token
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[token_exchange] exception: {e}", flush=True)
     return None, None
 
 
@@ -143,12 +144,13 @@ def _shopify_context():
     # App Bridge session token that's already in the Authorization header.
     try:
         auth_header = request.headers.get('Authorization', '')
+        print(f"[shopify_context] auth_header prefix={auth_header[:30]!r}", flush=True)
         if auth_header.startswith('Bearer eyJ'):
             shop, token = _try_session_token_exchange(auth_header[7:])
             if shop and token:
                 return shop, token, get_api_version()
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[shopify_context] exception: {e}", flush=True)
 
     store, token = get_effective_shopify_credentials()
     if not store or not token:
