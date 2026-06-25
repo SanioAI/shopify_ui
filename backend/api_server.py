@@ -115,7 +115,7 @@ def _try_session_token_exchange(session_token: str) -> tuple[str | None, str | N
                 "grant_type": "urn:ietf:params:oauth:grant-type:token-exchange",
                 "subject_token": session_token,
                 "subject_token_type": "urn:ietf:params:oauth:token-type:id_token",
-                "requested_token_type": "urn:shopify:params:oauth:token-type:offline-access-token",
+                "requested_token_type": "urn:shopify:params:oauth:token-type:online-access-token",
             },
             headers={"Accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"},
             timeout=15,
