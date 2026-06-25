@@ -1244,14 +1244,36 @@
     
     <!-- Include Catalog API FIRST -->
     <script src="catalog-api.js"></script>
-    
+
     <script>
+        // ========================================
+        // SHOPIFY SESSION TOKENS (App Bridge)
+        // ========================================
+        // getSessionToken() returns a short-lived JWT from Shopify when embedded;
+        // falls back to null outside the Shopify Admin iframe.
+        async function getSessionToken() {
+            try {
+                if (window.shopify && typeof window.shopify.idToken === 'function') {
+                    return await window.shopify.idToken();
+                }
+            } catch (e) { /* not embedded */ }
+            return null;
+        }
+
+        // Authenticated fetch — includes Shopify session token when available
+        async function apiFetch(url, options = {}) {
+            const token = await getSessionToken();
+            const headers = Object.assign({}, options.headers || {});
+            if (token) headers['Authorization'] = 'Bearer ' + token;
+            return fetch(url, Object.assign({}, options, { headers }));
+        }
+
         // ========================================
         // BACKEND INTEGRATION
         // ========================================
-        
+
         // catalogAPI is already initialized in catalog-api.js, no need to redeclare
-        
+
         // Optional shop from ?shop= (embedded app). Admin tokens never belong in the browser.
         function getShopFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1289,7 +1311,7 @@
             el.textContent = 'Testing ' + url + '...';
             el.style.color = '#637381';
             try {
-                const resp = await fetch(url + '/api/health');
+                const resp = await apiFetch(url + '/api/health');
                 const data = await resp.json();
                 el.textContent = 'OK: ' + (data.message || data.status);
                 el.style.color = '#008060';
@@ -1335,7 +1357,7 @@
                     console.warn('Set Backend URL in Settings to load dashboard stats.');
                     return;
                 }
-                const resp = await fetch(`${catalogAPI.backendUrl.replace(/\/$/, '')}/api/stats`);
+                const resp = await apiFetch(`${catalogAPI.backendUrl.replace(/\/$/, '')}/api/stats`);
                 if (!resp.ok) {
                     console.error('Stats:', await resp.text());
                     return;

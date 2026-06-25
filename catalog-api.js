@@ -18,6 +18,22 @@ class CatalogAgentAPI {
         this.currentJobId = null;
         this.shopifyStore = null;
     }
+
+    async _getSessionToken() {
+        try {
+            if (window.shopify && typeof window.shopify.idToken === 'function') {
+                return await window.shopify.idToken();
+            }
+        } catch (e) { /* not embedded */ }
+        return null;
+    }
+
+    async _fetch(url, options = {}) {
+        const token = await this._getSessionToken();
+        const headers = Object.assign({}, options.headers || {});
+        if (token) headers['Authorization'] = 'Bearer ' + token;
+        return fetch(url, Object.assign({}, options, { headers }));
+    }
     
     setBackendUrl(url) {
         this.backendUrl = url;
@@ -116,7 +132,7 @@ class CatalogAgentAPI {
             const url = `${this.backendUrl.replace(/\/$/, '')}/api/run-enrichment`;
             const body = { limit: options.limit || 50, demo: !!options.demo };
             onProgress({ step: 'fetch', message: body.demo ? 'Running in demo mode (using existing data)...' : 'Starting enrichment via backend...' });
-            const resp = await fetch(url, {
+            const resp = await this._fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)
