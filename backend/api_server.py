@@ -644,6 +644,25 @@ def writeback():
         return jsonify({"success": False, "error": str(e)}), 500
 
 
+@app.route("/api/debug/shopify", methods=["GET"])
+def debug_shopify():
+    ctx = _shopify_context()
+    if not ctx:
+        return jsonify({"error": "no credentials"}), 503
+    store, token, api_version = ctx
+    import requests as _req
+    url = f"https://{store}/admin/api/{api_version}/products.json?limit=1"
+    r = _req.get(url, headers={"X-Shopify-Access-Token": token}, timeout=15)
+    return jsonify({
+        "store": store,
+        "api_version": api_version,
+        "token_prefix": token[:8] + "...",
+        "status": r.status_code,
+        "body": r.json() if r.headers.get("content-type","").startswith("application/json") else r.text[:500],
+        "headers": dict(r.headers),
+    })
+
+
 @app.route("/api/agents", methods=["GET"])
 def get_agents():
     agents = [
