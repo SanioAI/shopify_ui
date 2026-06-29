@@ -792,14 +792,6 @@ def gdpr_shop_redact():
 
 # ── Shopify Billing API ───────────────────────────────────────────────────────
 
-BILLING_PLANS: dict = {
-    "launch_149":    {"name": "Launch",   "price": 149.0},
-    "growth_299":    {"name": "Growth",   "price": 299.0},
-    "pro_799":       {"name": "Pro",      "price": 799.0},
-    "advanced_1999": {"name": "Advanced", "price": 1999.0},
-}
-
-_BACKEND_URL = "https://catalog.paladio.ai"
 _SHOPIFY_CLIENT_ID = "150b3922192c38e9ae239a73791a84df"
 
 
@@ -844,60 +836,6 @@ def _load_subscription(shop: str) -> dict | None:
     except Exception:
         return None
 
-
-@app.route("/api/billing/subscribe", methods=["POST"])
-def billing_subscribe():
-    ctx = _shopify_context()
-    if not ctx:
-        return _shopify_not_configured()
-    store, token, api_version = ctx
-
-    body = request.get_json(silent=True) or {}
-    plan_key = (body.get("plan") or "").strip()
-    if plan_key not in BILLING_PLANS:
-        return jsonify({"error": f"Unknown plan: {plan_key!r}"}), 400
-
-    plan = BILLING_PLANS[plan_key]
-    return_url = f"{_BACKEND_URL}/api/billing/callback?shop={store}&plan={plan_key}"
-    test_mode = os.environ.get("SHOPIFY_BILLING_TEST", "false").lower() in ("1", "true", "yes")
-
-    mutation = """
-    mutation AppSubscriptionCreate($name: String!, $returnUrl: URL!, $lineItems: [AppSubscriptionLineItemInput!]!, $test: Boolean) {
-      appSubscriptionCreate(name: $name, returnUrl: $returnUrl, lineItems: $lineItems, test: $test) {
-        appSubscription { id status }
-        confirmationUrl
-        userErrors { field message }
-      }
-    }
-    """
-    variables = {
-        "name": plan["name"],
-        "returnUrl": return_url,
-        "test": test_mode,
-        "lineItems": [{
-            "plan": {
-                "appRecurringPricingDetails": {
-                    "price": {"amount": plan["price"], "currencyCode": "USD"},
-                    "interval": "EVERY_30_DAYS",
-                }
-            }
-        }],
-    }
-
-    try:
-        data = _gql_billing(store, token, api_version, mutation, variables)
-        result = (data.get("data") or {}).get("appSubscriptionCreate") or {}
-        errors = result.get("userErrors") or []
-        if errors:
-            return jsonify({"error": errors[0].get("message", "Billing error")}), 422
-        confirmation_url = result.get("confirmationUrl")
-        if not confirmation_url:
-            return jsonify({"error": "No confirmation URL returned by Shopify"}), 502
-        sub = result.get("appSubscription") or {}
-        _save_subscription(store, sub.get("id", ""), plan_key, sub.get("status", "PENDING"))
-        return jsonify({"confirmation_url": confirmation_url})
-    except Exception as exc:
-        return jsonify({"error": str(exc)}), 500
 
 
 @app.route("/api/billing/callback", methods=["GET"])

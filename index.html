@@ -1516,41 +1516,19 @@
 </div>
 
 <script>
-async function handleSubscribe(planKey, btn) {
-    var origText = btn.textContent;
+function handleSubscribe(planKey, btn) {
+    var shop = getShopFromUrl() || sessionStorage.getItem('shopify_shop') || '';
+    if (!shop) {
+        alert('Please open this app from your Shopify admin to manage your subscription.');
+        return;
+    }
     btn.disabled = true;
     btn.textContent = 'Redirecting to Shopify...';
-    try {
-        var backendUrl = (typeof catalogAPI !== 'undefined' ? catalogAPI.backendUrl : null) || 'https://catalog.paladio.ai';
-        var sessionToken = null;
-        try {
-            if (window.shopify && typeof window.shopify.idToken === 'function') {
-                sessionToken = await window.shopify.idToken();
-            }
-        } catch(e) {}
-        var headers = { 'Content-Type': 'application/json' };
-        if (sessionToken) headers['Authorization'] = 'Bearer ' + sessionToken;
-        var resp = await fetch(backendUrl + '/api/billing/subscribe', {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify({ plan: planKey })
-        });
-        var data = await resp.json();
-        if (data.confirmation_url) {
-            if (window.top && window.top !== window) {
-                window.top.location.href = data.confirmation_url;
-            } else {
-                window.location.href = data.confirmation_url;
-            }
-        } else {
-            alert('Billing error: ' + (data.error || 'Please try again.'));
-            btn.disabled = false;
-            btn.textContent = origText;
-        }
-    } catch(e) {
-        alert('Failed to start billing: ' + e.message);
-        btn.disabled = false;
-        btn.textContent = origText;
+    var url = 'https://' + shop + '/admin/charges/150b3922192c38e9ae239a73791a84df/pricing_plans';
+    if (window.top && window.top !== window) {
+        window.top.location.href = url;
+    } else {
+        window.location.href = url;
     }
 }
 
