@@ -17,7 +17,7 @@ Endpoints:
 - GET  /api/health - Health check
 """
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect as flask_redirect
 from flask_cors import CORS
 import requests
 import json
@@ -788,6 +788,159 @@ def gdpr_shop_redact():
     if not _verify_shopify_webhook(request):
         return jsonify({"error": "Unauthorized"}), 401
     return jsonify({"acknowledged": True}), 200
+
+
+# ── Shopify Billing API ───────────────────────────────────────────────────────
+
+BILLING_PLANS: dict = {
+    "launch_149":    {"name": "Launch",   "price": 149.0},
+    "growth_299":    {"name": "Growth",   "price": 299.0},
+    "pro_799":       {"name": "Pro",      "price": 799.0},
+    "advanced_1999": {"name": "Advanced", "price": 1999.0},
+}
+
+_BACKEND_URL = "https://catalog.paladio.ai"
+_SHOPIFY_CLIENT_ID = "150b3922192c38e9ae239a73791a84df"
+
+
+def _gql_billing(store: str, token: str, api_version: str, query: str, variables: dict | None = None) -> dict:
+    resp = requests.post(
+        f"https://{store}/admin/api/{api_version}/graphql.json",
+        json={"query": query, "variables": variables or {}},
+        headers={"X-Shopify-Access-Token": token, "Content-Type": "application/json"},
+        timeout=20,
+    )
+    resp.raise_for_status()
+    return resp.json()
+
+
+def _save_subscription(shop: str, sub_id: str, plan: str, status: str) -> None:
+    try:
+        from datetime import datetime, timezone
+        from shopify_token_store import _get_supabase
+        client = _get_supabase()
+        if client is None:
+            return
+        client.table("shopify_subscriptions").upsert({
+            "shop": shop,
+            "subscription_id": sub_id,
+            "plan": plan,
+            "status": status,
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+        }).execute()
+    except Exception:
+        pass
+
+
+def _load_subscription(shop: str) -> dict | None:
+    try:
+        from shopify_token_store import _get_supabase
+        client = _get_supabase()
+        if client is None:
+            return None
+        res = client.table("shopify_subscriptions").select("*").eq("shop", shop).limit(1).execute()
+        rows = res.data or []
+        return rows[0] if rows else None
+    except Exception:
+        return None
+
+
+@app.route("/api/billing/subscribe", methods=["POST"])
+def billing_subscribe():
+    ctx = _shopify_context()
+    if not ctx:
+        return _shopify_not_configured()
+    store, token, api_version = ctx
+
+    body = request.get_json(silent=True) or {}
+    plan_key = (body.get("plan") or "").strip()
+    if plan_key not in BILLING_PLANS:
+        return jsonify({"error": f"Unknown plan: {plan_key!r}"}), 400
+
+    plan = BILLING_PLANS[plan_key]
+    return_url = f"{_BACKEND_URL}/api/billing/callback?shop={store}&plan={plan_key}"
+    test_mode = os.environ.get("SHOPIFY_BILLING_TEST", "false").lower() in ("1", "true", "yes")
+
+    mutation = """
+    mutation AppSubscriptionCreate($name: String!, $returnUrl: URL!, $lineItems: [AppSubscriptionLineItemInput!]!, $test: Boolean) {
+      appSubscriptionCreate(name: $name, returnUrl: $returnUrl, lineItems: $lineItems, test: $test) {
+        appSubscription { id status }
+        confirmationUrl
+        userErrors { field message }
+      }
+    }
+    """
+    variables = {
+        "name": plan["name"],
+        "returnUrl": return_url,
+        "test": test_mode,
+        "lineItems": [{
+            "plan": {
+                "appRecurringPricingDetails": {
+                    "price": {"amount": plan["price"], "currencyCode": "USD"},
+                    "interval": "EVERY_30_DAYS",
+                }
+            }
+        }],
+    }
+
+    try:
+        data = _gql_billing(store, token, api_version, mutation, variables)
+        result = (data.get("data") or {}).get("appSubscriptionCreate") or {}
+        errors = result.get("userErrors") or []
+        if errors:
+            return jsonify({"error": errors[0].get("message", "Billing error")}), 422
+        confirmation_url = result.get("confirmationUrl")
+        if not confirmation_url:
+            return jsonify({"error": "No confirmation URL returned by Shopify"}), 502
+        sub = result.get("appSubscription") or {}
+        _save_subscription(store, sub.get("id", ""), plan_key, sub.get("status", "PENDING"))
+        return jsonify({"confirmation_url": confirmation_url})
+    except Exception as exc:
+        return jsonify({"error": str(exc)}), 500
+
+
+@app.route("/api/billing/callback", methods=["GET"])
+def billing_callback():
+    shop = (request.args.get("shop") or "").strip().lower()
+    plan_key = (request.args.get("plan") or "").strip()
+    charge_id = (request.args.get("charge_id") or "").strip()
+
+    if not shop:
+        return "Missing shop parameter", 400
+
+    if charge_id:
+        try:
+            from shopify_token_store import load_token_for_shop
+            token = load_token_for_shop(shop)
+            api_version = get_api_version()
+            if token:
+                query = """
+                query GetSub($id: ID!) {
+                  node(id: $id) { ... on AppSubscription { id status name } }
+                }
+                """
+                data = _gql_billing(shop, token, api_version, query, {"id": charge_id})
+                sub = ((data.get("data") or {}).get("node")) or {}
+                status = sub.get("status", "UNKNOWN")
+                if plan_key:
+                    _save_subscription(shop, charge_id, plan_key, status)
+        except Exception:
+            pass
+
+    return flask_redirect(f"https://{shop}/admin/apps/{_SHOPIFY_CLIENT_ID}")
+
+
+@app.route("/api/billing/status", methods=["GET"])
+def billing_status():
+    ctx = _shopify_context()
+    if not ctx:
+        return jsonify({"plan": "free", "status": "ACTIVE"})
+    store, _token, _api_version = ctx
+    sub = _load_subscription(store)
+    if not sub or sub.get("status") != "ACTIVE":
+        return jsonify({"plan": "free", "status": "ACTIVE"})
+    return jsonify({"plan": sub["plan"], "status": sub["status"]})
 
 
 if __name__ == "__main__":
