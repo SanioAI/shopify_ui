@@ -1517,6 +1517,7 @@
 
 <script>
 async function handleSubscribe(planKey, btn) {
+    var origText = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Redirecting to Shopify...';
     var shop = getShopFromUrl() || sessionStorage.getItem('shopify_shop') || '';
@@ -1534,15 +1535,18 @@ async function handleSubscribe(planKey, btn) {
     if (!shop) {
         alert('Please open this app from your Shopify admin to manage your subscription.');
         btn.disabled = false;
-        btn.textContent = btn.getAttribute('data-orig') || 'Subscribe';
+        btn.textContent = origText;
         return;
     }
     var url = 'https://' + shop + '/admin/charges/150b3922192c38e9ae239a73791a84df/pricing_plans';
-    if (window.top && window.top !== window) {
-        window.top.location.href = url;
-    } else {
-        window.location.href = url;
-    }
+    // Try App Bridge navigate first, then fall back to open(_top)
+    try {
+        if (window.shopify && typeof window.shopify.navigate === 'function') {
+            window.shopify.navigate(url);
+            return;
+        }
+    } catch(e) {}
+    open(url, '_top');
 }
 
 function openSubscribeModal(planKey, planLabel) {
