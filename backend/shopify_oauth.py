@@ -102,6 +102,23 @@ def _create_paladio_metafields_bg(shop: str, token: str, api_version: str) -> No
         time.sleep(0.3)
 
 
+def _has_active_shopify_subscription(shop: str, token: str, api_version: str) -> bool:
+    """Query Shopify directly for active subscriptions (includes Managed Pricing plans)."""
+    try:
+        query = "{ appInstallation { activeSubscriptions { id status } } }"
+        resp = requests.post(
+            f"https://{shop}/admin/api/{api_version}/graphql.json",
+            json={"query": query},
+            headers={"X-Shopify-Access-Token": token, "Content-Type": "application/json"},
+            timeout=10,
+        )
+        data = resp.json()
+        subs = ((data.get("data") or {}).get("appInstallation") or {}).get("activeSubscriptions") or []
+        return bool(subs)
+    except Exception:
+        return False
+
+
 oauth_bp = Blueprint("shopify_oauth", __name__, url_prefix="/oauth")
 
 
@@ -351,9 +368,15 @@ def oauth_callback():
         daemon=True,
     ).start()
 
-    # Redirect merchant into the embedded app UI
-    shop_name = shop.replace(".myshopify.com", "")
     client_id = get_oauth_client_id()
+    shop_name = shop.replace(".myshopify.com", "")
+
+    # If no active subscription, direct merchant to Shopify's billing page (Managed Pricing).
+    # This satisfies the "request approval for charges again on reinstall" requirement.
+    if not _has_active_shopify_subscription(shop, access_token, get_api_version()):
+        billing_url = f"https://{shop}/admin/charges/{client_id}/pricing_plans"
+        return redirect(billing_url)
+
     app_url = f"https://admin.shopify.com/store/{shop_name}/apps/{client_id}"
     return redirect(app_url)
 

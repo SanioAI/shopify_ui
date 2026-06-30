@@ -1516,14 +1516,27 @@
 </div>
 
 <script>
-function handleSubscribe(planKey, btn) {
-    var shop = getShopFromUrl() || sessionStorage.getItem('shopify_shop') || '';
-    if (!shop) {
-        alert('Please open this app from your Shopify admin to manage your subscription.');
-        return;
-    }
+async function handleSubscribe(planKey, btn) {
     btn.disabled = true;
     btn.textContent = 'Redirecting to Shopify...';
+    var shop = getShopFromUrl() || sessionStorage.getItem('shopify_shop') || '';
+    if (!shop) {
+        try {
+            if (window.shopify && typeof window.shopify.idToken === 'function') {
+                var jwt = await window.shopify.idToken();
+                var parts = jwt.split('.');
+                var pad = (4 - parts[1].length % 4) % 4;
+                var payload = JSON.parse(atob(parts[1] + '='.repeat(pad)));
+                shop = (payload.dest || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
+            }
+        } catch(e) {}
+    }
+    if (!shop) {
+        alert('Please open this app from your Shopify admin to manage your subscription.');
+        btn.disabled = false;
+        btn.textContent = btn.getAttribute('data-orig') || 'Subscribe';
+        return;
+    }
     var url = 'https://' + shop + '/admin/charges/150b3922192c38e9ae239a73791a84df/pricing_plans';
     if (window.top && window.top !== window) {
         window.top.location.href = url;
