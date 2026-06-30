@@ -371,13 +371,14 @@ def oauth_callback():
     client_id = get_oauth_client_id()
     shop_name = shop.replace(".myshopify.com", "")
 
-    # If no active subscription, direct merchant to Shopify's billing page (Managed Pricing).
-    # This satisfies the "request approval for charges again on reinstall" requirement.
-    if not _has_active_shopify_subscription(shop, access_token, get_api_version()):
-        billing_url = f"https://{shop}/admin/charges/{client_id}/pricing_plans"
-        return redirect(billing_url)
-
     app_url = f"https://admin.shopify.com/store/{shop_name}/apps/{client_id}"
+
+    # If no active subscription, send merchant to app with billing=required flag.
+    # The app's JS will use App Bridge to navigate to the pricing page after it loads,
+    # avoiding App Bridge overriding a direct server-side billing redirect.
+    if not _has_active_shopify_subscription(shop, access_token, get_api_version()):
+        return redirect(f"{app_url}?billing=required")
+
     return redirect(app_url)
 
 

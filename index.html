@@ -1322,6 +1322,29 @@
         }
         
         // Initialize on load
+        // After App Bridge loads, check if billing is required (set by OAuth callback on fresh install)
+        window.addEventListener('load', async function() {
+            if (new URLSearchParams(window.location.search).get('billing') !== 'required') return;
+            var shop = getShopFromUrl() || sessionStorage.getItem('shopify_shop') || '';
+            if (!shop) {
+                try {
+                    var jwt = await window.shopify.idToken();
+                    var parts = jwt.split('.');
+                    var pad = (4 - parts[1].length % 4) % 4;
+                    var payload = JSON.parse(atob(parts[1] + '='.repeat(pad)));
+                    shop = (payload.dest || '').replace(/^https?:\/\//, '').replace(/\/$/, '');
+                } catch(e) {}
+            }
+            if (!shop) return;
+            var url = 'https://' + shop + '/admin/charges/150b3922192c38e9ae239a73791a84df/pricing_plans';
+            try {
+                if (window.shopify && typeof window.shopify.navigate === 'function') {
+                    window.shopify.navigate(url); return;
+                }
+            } catch(e) {}
+            open(url, '_top');
+        });
+
         window.addEventListener('DOMContentLoaded', async () => {
             // Load saved backend URL; fix port 5000->5001 (macOS AirPlay uses 5000)
             let savedBackend = sessionStorage.getItem('catalog_backend_url');
