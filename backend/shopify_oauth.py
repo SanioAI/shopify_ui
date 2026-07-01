@@ -373,11 +373,12 @@ def oauth_callback():
 
     app_url = f"https://admin.shopify.com/store/{shop_name}/apps/{client_id}"
 
-    # If no active subscription, send merchant to app with billing=required flag.
-    # The app's JS will use App Bridge to navigate to the pricing page after it loads,
-    # avoiding App Bridge overriding a direct server-side billing redirect.
+    # If no active subscription, send merchant to our billing interstitial page
+    # (served from catalog.paladio.ai, outside Shopify's embedded context so App Bridge
+    # cannot override the redirect to the Managed Pricing plans page).
     if not _has_active_shopify_subscription(shop, access_token, get_api_version()):
-        return redirect(f"{app_url}?billing=required")
+        from urllib.parse import quote as _quote
+        return redirect(f"https://catalog.paladio.ai/billing/plans?shop={_quote(shop)}&return_to={_quote(app_url)}")
 
     return redirect(app_url)
 

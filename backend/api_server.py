@@ -881,6 +881,48 @@ def billing_status():
     return jsonify({"plan": sub["plan"], "status": sub["status"]})
 
 
+@app.route("/billing/plans", methods=["GET"])
+def billing_plans_page():
+    """Non-embedded interstitial that redirects to Shopify Managed Pricing page.
+    Served outside the Shopify admin iframe so App Bridge cannot override the redirect."""
+    shop = (request.args.get("shop") or "").strip().lower()
+    return_to = (request.args.get("return_to") or f"https://admin.shopify.com").strip()
+    if not shop or not shop.endswith(".myshopify.com"):
+        return "Missing or invalid shop parameter", 400
+    pricing_url = f"https://{shop}/admin/charges/{_SHOPIFY_CLIENT_ID}/pricing_plans"
+    safe_pricing = pricing_url.replace('"', '%22')
+    safe_return = return_to.replace('"', '%22')
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Select Your Plan — Segments</title>
+<style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f6f6f7;
+     display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}}
+.card{{background:#fff;border-radius:12px;padding:48px 40px;text-align:center;max-width:420px;width:100%;
+       box-shadow:0 2px 8px rgba(0,0,0,.08)}}
+h1{{font-size:22px;font-weight:700;color:#202223;margin-bottom:10px}}
+p{{font-size:15px;color:#637381;line-height:1.6;margin-bottom:28px}}
+.btn{{display:inline-block;background:#008060;color:#fff;padding:14px 32px;border-radius:8px;
+      text-decoration:none;font-size:15px;font-weight:600}}
+.btn:hover{{background:#006e52}}
+.skip{{display:block;margin-top:16px;font-size:13px;color:#8c9196;text-decoration:none}}
+.skip:hover{{color:#637381}}
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Choose your plan</h1>
+  <p>Select a plan to start using Segments.<br>You can change or cancel anytime.</p>
+  <a class="btn" href="{safe_pricing}">View Plans</a>
+  <a class="skip" href="{safe_return}">Continue on free plan →</a>
+</div>
+</body>
+</html>""", 200, {"Content-Type": "text/html"}
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5001))
     print("Starting Catalog AI Direct API...")
