@@ -886,10 +886,11 @@ def billing_plans_page():
     """Non-embedded interstitial that redirects to Shopify Managed Pricing page.
     Served outside the Shopify admin iframe so App Bridge cannot override the redirect."""
     shop = (request.args.get("shop") or "").strip().lower()
-    return_to = (request.args.get("return_to") or f"https://admin.shopify.com").strip()
+    return_to = (request.args.get("return_to") or "https://admin.shopify.com").strip()
     if not shop or not shop.endswith(".myshopify.com"):
         return "Missing or invalid shop parameter", 400
-    pricing_url = f"https://{shop}/admin/charges/{_SHOPIFY_CLIENT_ID}/pricing_plans"
+    shop_name = shop.replace(".myshopify.com", "")
+    pricing_url = f"https://admin.shopify.com/store/{shop_name}/charges/segments-7/pricing_plans"
     safe_pricing = pricing_url.replace('"', '%22')
     safe_return = return_to.replace('"', '%22')
     return f"""<!DOCTYPE html>

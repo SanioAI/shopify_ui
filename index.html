@@ -1336,12 +1336,8 @@
                 } catch(e) {}
             }
             if (!shop) return;
-            var url = 'https://' + shop + '/admin/charges/150b3922192c38e9ae239a73791a84df/pricing_plans';
-            try {
-                if (window.shopify && typeof window.shopify.navigate === 'function') {
-                    window.shopify.navigate(url); return;
-                }
-            } catch(e) {}
+            var shopName = shop.replace('.myshopify.com', '');
+            var url = 'https://admin.shopify.com/store/' + shopName + '/charges/segments-7/pricing_plans';
             open(url, '_top');
         });
 
@@ -1561,14 +1557,8 @@ async function handleSubscribe(planKey, btn) {
         btn.textContent = origText;
         return;
     }
-    var url = 'https://' + shop + '/admin/charges/150b3922192c38e9ae239a73791a84df/pricing_plans';
-    // Try App Bridge navigate first, then fall back to open(_top)
-    try {
-        if (window.shopify && typeof window.shopify.navigate === 'function') {
-            window.shopify.navigate(url);
-            return;
-        }
-    } catch(e) {}
+    var shopName = shop.replace('.myshopify.com', '');
+    var url = 'https://admin.shopify.com/store/' + shopName + '/charges/segments-7/pricing_plans';
     open(url, '_top');
 }
 
